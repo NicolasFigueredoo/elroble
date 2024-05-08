@@ -59,7 +59,9 @@ export default createStore({
     getIdLogin(state){
       return state.idLogin;
     },
-
+    getMostrarComponente(state) {
+      return state.mostrarComponente;
+    },
     
   
   }

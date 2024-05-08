@@ -289,7 +289,8 @@
     overflow-y: auto;">
                 
                 <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true"/>
-         
+                <ShowSlider v-if="mostrarComponente === 1"/>
+
 
 
             </div>
@@ -309,22 +310,57 @@
 
 <script>
 import Alerta from "@/components/admin/alerta/Alerta.vue";
+import ShowSlider from "@/components/admin/home/sliderHome/ShowSlider.vue";
 
 import axios from "axios";
 
 export default {
     components: {
-        Alerta
+        Alerta,
+        ShowSlider
   
     },
     data(){
         return{
         }
     },
+    computed:{
+        mostrarComponente(){
+            return this.$store.getters['getMostrarComponente'];
+        },
+        mostrarAlerta(){
+            return this.$store.getters['getMostrarAlerta'];
+        },
+        getIdLogin(){
+            return this.$store.getters['getIdLogin'];
+        },
+    },
     methods:{
-        mostrarComponenteF(t){
-            console.log(t)
+        logout(){
+            this.$router.push('/admin/login');
+            localStorage.setItem('idLogin', JSON.stringify(null));
 
+        },
+
+        obtenerUsuario(){
+            axios.get(`/api/obtenerIdUsuario/${this.getIdLogin}`)
+                .then(response => {
+                    this.rol = response.data.rol
+                    this.nombre = response.data.usuario
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+
+        mostrarComponenteF(idComponente){
+            this.$store.commit('mostrarComponente', idComponente);
+        }
+    },
+    mounted(){
+        this.obtenerUsuario();
+        if(this.getIdLogin == null){
+            this.$router.push('/admin/login');
         }
     }
   
@@ -393,7 +429,7 @@ body {
 
 .sidebar {
     overflow-y: scroll;
-    background: rgb( 187, 17, 28);
+    background:  rgb(0, 0, 0,0.5);;
     height: 100%;
     width: 15rem;
     transform: translateX(-15rem);
