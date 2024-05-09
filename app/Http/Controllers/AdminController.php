@@ -61,7 +61,8 @@ class AdminController extends Controller
         $slider = new Slider();
         $slider->orden = $request->orden;
         $slider->texto = $request->jsonCodigoSlider;
-        $slider->seccion = $request->seccion;
+        $slider->textoboton = $request->textoboton;
+        $slider->linkboton = $request->linkboton;
 
         if ($request->hasFile('foto')) {
           
@@ -79,8 +80,64 @@ class AdminController extends Controller
 
     }
 
+
+    //CONTACTO
+    public function updateContacto(Request $request)
+    {
+        $contacto = Contacto::first();
+        $contacto->direccion = $request->direccion;
+        $contacto->email = $request->email;    
+        $contacto->telefono = $request->telefono;
+        $contacto->telefono_secundario = $request->telefono2;    
+        $contacto->instagram = $request->instagram;    
+
+        $contacto->save();
+
+        return response()->json(['message' => 'Contacto actualizado con exito'], 200);
+    }
+
+    public function obtenerContacto(){
+        $contacto = Contacto::all();
+
+        return response()->json($contacto);
+    }
+
+    //LOGO
+    public function obtenerLogos(){
+        $logos = Logo::first();
+        return response()->json($logos);
+    }
   
-   
+      public function updateLogo(Request $request)
+    {
+        
+        $logo = Logo::first();
+
+        if ($request->hasFile('logoNav')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('logoNav')->store('fotos');
+            $logo->navbar = $photoPath;
+        }
+
+        if ($request->hasFile('logoFooter')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('logoFooter')->store('fotos');
+            $logo->footer = $photoPath;
+        }
+    
+        $logo->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+
+    }
 
 
   

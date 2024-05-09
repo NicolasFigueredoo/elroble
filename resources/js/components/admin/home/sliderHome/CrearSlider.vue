@@ -11,17 +11,27 @@
                 <input type="text" class="form-control" id="orden" :value="this.slider.orden">
             </div>
             <div class="mb-3">
-                <label class="form-label">Imagen (Tamaño recomendado 1400x614)</label>
+                <label class="form-label">Imagen (Tamaño recomendado 640x1400)</label>
                 <input type="file" ref="fotoSlider" class="form-control" @change="guardarFoto()">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Texto</label>
                 <textarea class="summernote" id="editor"></textarea>
             </div>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    <label class="form-label">Texto boton</label>
+                    <input type="text" class="form-control" id="botonText">
+                </div>
+                <div class="col-lg-6">
+                    <label class="form-label">Link boton</label>
+                    <input type="text" class="form-control" id="botonLink">
+                </div>
+            </div>
 
             <div class="w-100 d-flex justify-content-end">
                 <button @click="crearSlider()" type="button" class="btn"
-                    style="background-color: rgb(52, 68, 127); color: white;">Guardar</button>
+                    style="background-color: #7F7F7F; color: white;">Guardar</button>
             </div>
 
         </form>
@@ -49,14 +59,7 @@ export default {
         }
 
     },
-    computed: {
-        idSlider() {
-            return this.$store.getters['getidSliderHome'];
-        },
-        idComponente() {
-            return this.$store.getters['getMostrarComponente'];
-        }
-    },
+  
     methods: {
         guardarFoto() {
             const file = this.$refs.fotoSlider;
@@ -67,7 +70,8 @@ export default {
             formData.append('foto', this.foto);
             formData.append('jsonCodigoSlider', $('#editor').summernote('code').toString());
             formData.append('orden', $('#orden').val());
-            formData.append('seccion', this.idSlider);
+            formData.append('textoboton', $('#botonText').val());
+            formData.append('linkboton', $('#botonLink').val());
 
             axios.post('/api/crearSlider', formData, {
                 headers: {
@@ -78,13 +82,8 @@ export default {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Slider creado con éxito');
-                    if(this.idSlider === 'home'){
-                        this.$store.commit('mostrarComponente', 1);
+                    this.$store.commit('mostrarComponente', 1);
 
-                    }else{
-                        this.$store.commit('mostrarComponente', 6);
-
-                    }
                 })
                 .catch(error => {
                     console.error(error);
