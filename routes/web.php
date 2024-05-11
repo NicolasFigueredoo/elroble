@@ -25,7 +25,7 @@ Route::get('/api/obtenerIdUsuario/{idUsuario}', [UserController::class, 'obtener
 //SLIDER
 Route::get('/api/obtenerSliders', [AdminController::class, 'obtenerSliders']);
 Route::post('/api/updateSlider', [AdminController::class, 'updateSlider']);
-Route::get('/api/obtenerSliderHome/{idSlider}', [AdminController::class, 'obtenerSliderHome']);
+Route::get('/api/obtenerSlider/{idSlider}', [AdminController::class, 'obtenerSlider']);
 Route::post('/api/crearSlider', [AdminController::class, 'crearSlider']);
 Route::post('/api/deleteSlider', [AdminController::class, 'deleteSlider']);
 
@@ -41,3 +41,9 @@ Route::get('/api/obtenerLogo/{idLogo}', [AdminController::class, 'obtenerLogo'])
 
 //PRODUCTOS
 Route::get('/api/obtenerProductos', [ProductosController::class, 'index']);
+Route::post('/api/crearProducto', [ProductosController::class, 'crearProducto']);
+Route::post('/api/deleteProducto', [ProductosController::class, 'deleteProducto']);
+Route::post('/api/updateProducto', [ProductosController::class, 'updateProducto']);
+Route::get('/api/obtenerProducto/{idProducto}', [ProductosController::class, 'obtenerProducto']);
+Route::post('/api/guardarImagenProducto', [ProductosController::class, 'guardarImagenProducto']);
+Route::post('/api/eliminarImagen', [ProductosController::class, 'eliminarImagen']);

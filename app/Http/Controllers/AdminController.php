@@ -32,6 +32,8 @@ class AdminController extends Controller
         $slider = Slider::find($request->idSlider);
         $slider->orden = $request->orden;
         $slider->texto = $request->jsonCodigoSlider;
+        $slider->textoboton = $request->textoboton;
+        $slider->linkboton = $request->linkboton;
 
         if ($request->hasFile('foto')) {
           
@@ -78,6 +80,12 @@ class AdminController extends Controller
 
         return response()->json(['message' => 'Datos subidos correctamente'], 200);
 
+    }
+
+    public function obtenerSlider($idSlider)
+    {
+        $slider = Slider::find($idSlider);
+        return response()->json($slider);
     }
 
 

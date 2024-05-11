@@ -8,9 +8,23 @@ export default createStore({
     mensajeAlerta: null,
     mostrarAlerta: null,
     alertaClase: null,
+    idSlider: null,
+    idProducto: null,
+
     inputValue: localStorage.getItem('inputValue') || false,
+    summer: null,
+
   },
   mutations: {
+    setProductoId(state,idProducto){
+      state.idProducto = idProducto
+    },
+    setSliderIdComponent(state,idSliderHome){
+      state.idSliderHome = idSliderHome
+    },
+    setSummer(state,bool){
+      state.summer = bool
+    },
     setInputValue(state,bool){
       state.inputValue = localStorage.setItem('inputValue', bool)
     },
@@ -41,6 +55,16 @@ export default createStore({
   },
  
   getters: {
+    getIdProducto(state){
+      return state.idProducto;
+    },
+    getidSlider(state) {
+      return state.idSliderHome;
+    },
+    getSummer(state){
+      return state.summer;
+
+    },
     getInputValue(state) {
       return state.inputValue;
     },

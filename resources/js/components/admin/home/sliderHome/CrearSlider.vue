@@ -8,11 +8,11 @@
         <form class="mt-3">
             <div class="mb-3">
                 <label class="form-label">orden</label>
-                <input type="text" class="form-control" id="orden" :value="this.slider.orden">
+                <input type="text" class="form-control" id="orden">
             </div>
             <div class="mb-3">
-                <label class="form-label">Imagen (Tamaño recomendado 640x1400)</label>
-                <input type="file" ref="fotoSlider" class="form-control" @change="guardarFoto()">
+                <label class="form-label">Imagen (Tamaño recomendado 586x1400)</label>
+                <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Texto</label>
@@ -59,8 +59,19 @@ export default {
         }
 
     },
-  
+
+    computed: {
+        getSummer() {
+            return this.$store.getters['getSummer'];
+        }
+    },
     methods: {
+        resetCampos(){
+            $('#orden').val('');
+            $('#botonText').val('');
+            $('#botonLink').val('');
+            $('#imgs').val('');
+        },
         guardarFoto() {
             const file = this.$refs.fotoSlider;
             this.foto = file.files[0]
@@ -95,21 +106,30 @@ export default {
 
         },
         summerNote() {
-            $('#editor').summernote({
-                height: 300,
-            });
-            $('.summernote').summernote();
-            var noteBar = $('.note-toolbar');
-            noteBar.find('[data-toggle]').each(function () {
-                $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-            });
-        },
-    
+
+            
+
+            if (this.getSummer === null && this.getSummer !== true) {
+                $('#editor').summernote({
+                    height: 300,
+                });
+                var noteBar = $('.note-toolbar');
+                noteBar.find('[data-toggle]').each(function () {
+                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+                });
+
+                this.$store.commit('setSummer', true);
+            }
+
+
+        }
+
     },
 
     mounted() {
 
         this.summerNote();
+        this.resetCampos();
 
 
     }

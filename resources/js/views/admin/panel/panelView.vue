@@ -57,11 +57,7 @@
                                     <a @click="mostrarComponenteF(25)" class="nav-link">Mostrar</a>
                                 </nav>
                             </div>
-                            <div id="collapseProductos" class="collapse">
-                                <nav  class="sidenav-menu-nested nav accordion">
-                                    <a @click="mostrarComponenteF(24)" class="nav-link">Crear</a>
-                                </nav>
-                            </div>
+                  
                         </li>
     
                  
@@ -203,6 +199,7 @@
                 <!--COMPONENTES SLIDER -->
                 <ShowSlider v-if="mostrarComponente === 1"/>
                 <CrearSlider v-if="mostrarComponente === 29"/>
+                <EditSlider v-if="mostrarComponente === 2"/>
 
                 <!--COMPONENTES CONTACTO -->
                 <ShowContactos v-if="mostrarComponente === 13"/>
@@ -213,6 +210,8 @@
                 <!--COMPONENTES PRODUCTOS -->
                 <ShowProductos v-if="mostrarComponente === 25"/>
                 <CrearProducto v-if="mostrarComponente === 26"/>
+                <EditProducto v-if="mostrarComponente === 28"/>
+                <productosImagenes v-if="mostrarComponente === 27"/>
 
 
             </div>
@@ -234,11 +233,14 @@
 import Alerta from "@/components/admin/alerta/Alerta.vue";
 import ShowSlider from "@/components/admin/home/sliderHome/ShowSlider.vue";
 import CrearSlider from "@/components/admin/home/sliderHome/CrearSlider.vue";
+import EditSlider from "@/components/admin/home/sliderHome/EditSlider.vue";
 
 import ShowContactos from "@/components/admin/contactos/ShowContactos.vue";
 import ShowLogos from "@/components/admin/logos/ShowLogos.vue";
 import ShowProductos from "@/components/admin/productos/ShowProductos.vue";
 import CrearProducto from "@/components/admin/productos/CrearProducto.vue";
+import EditProducto from "@/components/admin/productos/EditProducto.vue";
+import productosImagenes from "@/components/admin/productos/productosImagenes.vue";
 
 import axios from "axios";
 
@@ -250,7 +252,10 @@ export default {
         ShowLogos,
         CrearSlider,
         ShowProductos,
-        CrearProducto
+        CrearProducto,
+        EditSlider,
+        productosImagenes,
+        EditProducto
   
     },
     data(){

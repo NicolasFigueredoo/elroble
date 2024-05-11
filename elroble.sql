@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.28-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.6.0.6765
+-- HeidiSQL Versión:             12.1.0.6537
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -37,15 +37,29 @@ CREATE TABLE IF NOT EXISTS `cache_locks` (
 -- Volcando estructura para tabla elroble.contacto
 CREATE TABLE IF NOT EXISTS `contacto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `direccion` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '',
+  `direccion` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `telefono` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '',
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '',
-  `facebook` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `telefono_secundario` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `instagram` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla elroble.contacto: ~0 rows (aproximadamente)
+INSERT INTO `contacto` (`id`, `direccion`, `telefono`, `email`, `telefono_secundario`, `instagram`, `updated_at`) VALUES
+	(1, 'Chaco 2580, B1825FSB Valentín Alsina, Provincia de', '011 4208-8500', 'pedidoselroblesrl@hotmail.com', '(+54 11) 4208-8500', 'https://www.instagram.com/elroblesrl/?hl=es', '2024-05-09 13:02:23');
+
+-- Volcando estructura para tabla elroble.descargas
+CREATE TABLE IF NOT EXISTS `descargas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` longtext NOT NULL,
+  `texto` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `file` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- Volcando datos para la tabla elroble.descargas: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla elroble.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -67,12 +81,20 @@ CREATE TABLE IF NOT EXISTS `imagenes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_producto` int(11) DEFAULT NULL,
   `path` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `orden` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `producto_id` (`id_producto`),
   CONSTRAINT `producto_id` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla elroble.imagenes: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla elroble.imagenes: ~4 rows (aproximadamente)
+INSERT INTO `imagenes` (`id`, `id_producto`, `path`, `updated_at`, `created_at`, `orden`) VALUES
+	(11, 25, 'fotos/TdUJ6msUtfnezLwdJkasSy0hYsb24iDHJ0ldMonO.jpg', '2024-05-11 03:26:31', '2024-05-11 03:26:31', 'aa'),
+	(12, 27, 'fotos/TlPz88FFXrLUIEGy3s3VX26Yeoxs1yZOY8e26pcI.png', '2024-05-11 03:26:55', '2024-05-11 03:26:55', 'aa'),
+	(13, 28, 'fotos/voLvdOs4zYv1nduc8E3CAmPzmGyl8i4BDXeMtnH0.png', '2024-05-11 03:27:16', '2024-05-11 03:27:16', 'aa'),
+	(14, 29, 'fotos/KuejfxH5wRAejDTwW9FhdbwGQj8amzjFSwYhTrK7.png', '2024-05-11 03:27:35', '2024-05-11 03:27:35', 'aa');
 
 -- Volcando estructura para tabla elroble.jobs
 CREATE TABLE IF NOT EXISTS `jobs` (
@@ -111,10 +133,13 @@ CREATE TABLE IF NOT EXISTS `logos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `navbar` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `footer` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla elroble.logos: ~0 rows (aproximadamente)
+INSERT INTO `logos` (`id`, `navbar`, `footer`, `updated_at`) VALUES
+	(1, 'fotos/JFq9CZJJ5ENZriQOfnw2MUAlu6N4rsiYk0OHqAdd.png', 'fotos/ggyzjVxRh5gGteAIhVx2teYL3MfIi2tiVxmyMhCc.png', '2024-05-09 13:46:19');
 
 -- Volcando estructura para tabla elroble.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -162,10 +187,17 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `nombre` varchar(50) NOT NULL,
   `texto` varchar(150) DEFAULT NULL,
   `destacado` int(11) NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla elroble.productos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla elroble.productos: ~4 rows (aproximadamente)
+INSERT INTO `productos` (`id`, `orden`, `nombre`, `texto`, `destacado`, `updated_at`, `created_at`) VALUES
+	(25, 'aa', 'Espatula curva para balde', NULL, 1, '2024-05-11 03:24:21', '2024-05-11 03:24:21'),
+	(27, 'bb', 'Espatula para pintor', NULL, 0, '2024-05-11 03:26:45', '2024-05-11 03:26:45'),
+	(28, 'cc', 'Llana dentada', NULL, 1, '2024-05-11 03:27:08', '2024-05-11 03:27:08'),
+	(29, 'aa', 'Mangos', NULL, 1, '2024-05-11 03:27:28', '2024-05-11 03:27:28');
 
 -- Volcando estructura para tabla elroble.seccionempresa
 CREATE TABLE IF NOT EXISTS `seccionempresa` (
@@ -191,6 +223,17 @@ CREATE TABLE IF NOT EXISTS `seccionhome` (
 
 -- Volcando datos para la tabla elroble.seccionhome: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla elroble.servicios
+CREATE TABLE IF NOT EXISTS `servicios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `texto` longtext NOT NULL,
+  `imagen` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- Volcando datos para la tabla elroble.servicios: ~0 rows (aproximadamente)
+
 -- Volcando estructura para tabla elroble.sessions
 CREATE TABLE IF NOT EXISTS `sessions` (
   `id` varchar(255) NOT NULL,
@@ -206,33 +249,43 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 
 -- Volcando datos para la tabla elroble.sessions: ~1 rows (aproximadamente)
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-	('v4jdSqbBmP3QWHmzTzbUW1SUUzjfzg4HItczwYXw', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQWF6TWFiQjRVaXlGaDZMQkF4QVpCTEVjVjZhVHNwYmR3STdWaUFNZyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1715188261);
+	('hMmdhPqMWngjKbUankYHQ26veWoEn7DBGwM5cfAi', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoid2VaeU1JY0I3SWRxeVdVdTE0UENtZ0dJWmlRS3dqdDdONXA2a1FlSyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hcGkvZ2V0SW1hZ2UvS3VlamZ4SDV3UkFlakRUd1c5RmhkYndHUWo4YW16akZTd1loVHJLNy5wbmciO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1715465321),
+	('keWff5hn1cblLthcK5yPJS714Fw4GPmL6abDvttS', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidUlTV2xuaWs3ZXpKT3NITTVzWlFBbzNwMUUxMHpLTVN6MVlJUjVnRiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hcGkvZ2V0SW1hZ2UvSkZxOUNaSko1RU5acmlRT2ZudzJNVUFsdTZONHJzaVlrME9IcUFkZC5wbmciO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1715465320),
+	('rgqxVcMMZN5Jtd7aXkWxQmTM1EKBdauMIfO7uAsf', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibFpyaEZDMGd4aUk4QUk3cWpaQ0tHcG1xTkRDdkdWZVY1YnBUQ1hlcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hcGkvZ2V0SW1hZ2UvaWI4SXhqRnI2VmF4OFpzZzd3ZlNwQVREMFUxbTdqMkFvZmFrZFNYMy5wbmciO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1715465321),
+	('vw0fvNRLBnoKpjdmI6i1fNUVgvJZdPIpsjLCP5Hh', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZFpia2tNM3JFZ2pMSndDVmRmdVlXSWc2Z0QxRHhjejVXRDFDSjhlMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hcGkvZ2V0SW1hZ2UvS3VlamZ4SDV3UkFlakRUd1c5RmhkYndHUWo4YW16akZTd1loVHJLNy5wbmciO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1715399136),
+	('xwb4qpIqz5Q5DXL7q3Rbogxfu6WtxpDf4LpYhICy', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibkM3Q09UenZZcUY0MUsxSmhiSEN4dXNqVWN1UmVJdlQ0eUdYOXo2cSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hcGkvb2J0ZW5lckxvZ29zIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1715465320);
 
 -- Volcando estructura para tabla elroble.slider
 CREATE TABLE IF NOT EXISTS `slider` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orden` varchar(50) DEFAULT NULL,
   `texto` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `link` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `textoboton` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `imagen` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `mostrarproducto` int(11) NOT NULL,
+  `linkboton` longtext CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla elroble.slider: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla elroble.slider: ~8 rows (aproximadamente)
+INSERT INTO `slider` (`id`, `orden`, `texto`, `textoboton`, `imagen`, `linkboton`, `updated_at`, `created_at`) VALUES
+	(5, 'cc', '<p>esto es una prueba 2</p>', 'Ver productos', 'fotos/ib8IxjFr6Vax8Zsg7wfSpATD0U1m7j2AofakdSX3.png', NULL, '2024-05-10 13:31:43', '2024-05-10 13:16:37');
 
 -- Volcando estructura para tabla elroble.subproductos
 CREATE TABLE IF NOT EXISTS `subproductos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `producto_id` int(11) NOT NULL,
-  `codigo` int(10) DEFAULT NULL,
-  `tamaño` varchar(80) DEFAULT NULL,
-  `codigobarra` bigint(20) DEFAULT NULL,
+  `codigo` varchar(100) DEFAULT NULL,
+  `tamaño` varchar(100) DEFAULT NULL,
+  `pack` varchar(100) DEFAULT NULL,
+  `codigobarra` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `producto_subproducto_id` (`producto_id`),
   CONSTRAINT `producto_subproducto_id` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla elroble.subproductos: ~0 rows (aproximadamente)
 
@@ -293,6 +346,15 @@ CREATE TABLE IF NOT EXISTS `valores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla elroble.valores: ~0 rows (aproximadamente)
+
+-- Volcando estructura para tabla elroble.videos
+CREATE TABLE IF NOT EXISTS `videos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `link` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- Volcando datos para la tabla elroble.videos: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
