@@ -66,11 +66,8 @@ export default {
         idComponente() {
             return this.$store.getters['getMostrarComponente'];
         },
-        computed: {
         getSummer() {
-            return this.$store.getters['getSummer'];
-        }
-    },
+            return this.$store.getters['getSummer'];},
     },
     methods: {
         guardarFoto() {

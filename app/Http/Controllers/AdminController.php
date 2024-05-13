@@ -9,10 +9,12 @@ use App\Models\CategoriaHome;
 use App\Models\Contacto;
 use App\Models\Logo;
 use App\Models\MetaDatos;
+use App\Models\Novedad;
 use App\Models\Seccion;
 use App\Models\Servicio;
 use App\Models\Slider;
 use App\Models\Suscripcion;
+use App\Models\Valores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
@@ -147,6 +149,156 @@ class AdminController extends Controller
 
     }
 
+    //OBTENER BANNER
+    public function obtenerBanner()
+    {
+        $banners = Banner::all();
+        return response()->json($banners);
+    }
+
+    public function updateBanner(Request $request)
+    {
+        $banner = Banner::find($request->idBanner);
+        $banner->titulo = $request->bannerTitulo;
+        $banner->texto = $request->bannerTexto;
+        $banner->link = $request->linkBoton;
+        $banner->textoboton = $request->txtBoton;
+
+        if ($request->hasFile('foto')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('foto')->store('fotos');
+            $banner->imagen = $photoPath;
+        }
+
+        $banner->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+
+    }
+
+
+    //NOVEDADES
+    public function obtenerNovedades()
+    {
+        $novedades = Novedad::orderBy('orden', 'asc')->get();
+        return response()->json($novedades);
+    }
+
+    public function obtenerNovedad($idNovedad)
+    {
+        $novedad = Novedad::find($idNovedad);
+        return response()->json($novedad);
+    }
+
+    public function crearNovedad(Request $request)
+    {
+        $novedad = new Novedad();
+        $novedad->orden = $request->orden;
+        $novedad->titulo = $request->titulo;
+        $novedad->epigrafe = $request->epigrafe;
+        $novedad->etiqueta = $request->etiqueta;
+        $novedad->destacado = $request->destacado;
+        
+        $novedad->texto = $request->texto;
+        if ($request->hasFile('foto')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('foto')->store('fotos');
+            $novedad->imagen = $photoPath;
+        }
+
+        $novedad->save();
+
+
+        return response()->json($novedad);
+    }
+
+    public function updateNovedad(Request $request)
+    {
+        $novedad = Novedad::find($request->idNovedad);
+        $novedad->orden = $request->orden;
+        $novedad->titulo = $request->titulo;
+        $novedad->epigrafe = $request->epigrafe;
+        $novedad->etiqueta = $request->etiqueta;
+        $novedad->destacado = $request->destacado;
+        
+        $novedad->texto = $request->texto;
+        if ($request->hasFile('foto')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('foto')->store('fotos');
+            $novedad->imagen = $photoPath;
+        }
+
+        $novedad->save();
+
+
+        return response()->json($novedad);
+    }
+
+    public function deleteNovedad(Request $request)
+    {
+        $novedad = Novedad::find($request->idNovedad);
+        $novedad->delete();
+        return response()->json($novedad);
+    }
+
+
+    //VALORES
+    public function obtenerSecciones()
+    {
+        $secciones = Valores::orderBy('orden', 'asc')->get();
+        return response()->json($secciones);
+    }
+
+    public function obtenerSeccion($idSeccion)
+    {
+        $seccion = Valores::find($idSeccion);
+        return response()->json($seccion);
+    }
+
+    public function updateSeccion(Request $request)
+    {
+        $seccion = Valores::find($request->idSeccion);
+        $seccion->orden = $request->orden;
+        $seccion->titulo = $request->titulo;
+        $seccion->texto = $request->texto;
+        $seccion->icono = $request->icono;
+        $seccion->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+
+    }
+
+    public function deleteSeccion(Request $request){
+        $seccion = Valores::find($request->idValor);
+        $seccion->delete();
+
+        return response()->json(['message' => 'Valor Eliminado'], 200);
+    }
+
+    public function crearSeccion(Request $request)
+    {
+        $seccion = new Valores();
+        $seccion->orden = $request->orden;
+        $seccion->titulo = $request->titulo;
+        $seccion->texto = $request->texto;
+        $seccion->icono = $request->icono;
+        $seccion->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+
+    }
 
   
 

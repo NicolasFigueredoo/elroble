@@ -33,6 +33,39 @@
                                     <a @click="mostrarComponenteF(1)" class="nav-link ">Slider</a>
                                 </nav>
                             </div>
+                            <div id="collapseHome" class="collapse">
+                                <nav  class="sidenav-menu-nested nav accordion">
+                                    <a @click="mostrarComponenteF(7)" class="nav-link ">Banner</a>
+                                </nav>
+                            </div>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEmpresa"
+                                aria-expanded="false" aria-controls="collapseEmpresa">
+                                <div class="nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+                                    </svg>
+                                </div>
+                                <span>Empresa</span>
+                                <div class="sidenav-collapse-arrow">
+                                        <svg class="fa-solid fa-angle-down" xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                                            <path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                                </div>
+                            </a>
+                            <div id="collapseEmpresa" class="collapse">
+                                <nav  class="sidenav-menu-nested nav accordion">
+                                    <a @click="mostrarComponenteF(8)" class="nav-link ">Banner</a>
+                                </nav>
+                            </div>
+                            <div id="collapseEmpresa" class="collapse">
+                                <nav  class="sidenav-menu-nested nav accordion">
+                                    <a @click="mostrarComponenteF(32)" class="nav-link ">Valores</a>
+                                </nav>
+                            </div>
                         </li>
     
                       
@@ -58,6 +91,22 @@
                                 </nav>
                             </div>
                   
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a @click="mostrarComponenteF(40)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseContacto"
+                                aria-expanded="false" aria-controls="collapseContacto">
+                                <div class="nav-link-icon">
+    
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                        <path fill="#ffffff" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>
+                                </div>
+                                <span>Novedades</span>
+                                <div class="sidenav-collapse-arrow">
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </div>
+                            </a>
+                      
                         </li>
     
                  
@@ -213,6 +262,24 @@
                 <EditProducto v-if="mostrarComponente === 28"/>
                 <productosImagenes v-if="mostrarComponente === 27"/>
 
+                <!--COMPONENTES SECCION -->
+                <EditBanner v-if="mostrarComponente === 7"/> <!--COMPONENTES SECCION HOME -->
+                <EditBanner v-if="mostrarComponente === 8"/> <!--COMPONENTES SECCION EMPRESA-->
+
+                <!--COMPONENTES NOVEDADES -->
+                <ShowNovedades v-if="mostrarComponente === 40"/>
+                <EditarNovedad v-if="mostrarComponente === 41"/>
+                <CrearNovedad v-if="mostrarComponente === 42"/>
+
+                <!--COMPONENTES SUBCRIPCIONES -->
+                <ShowSuscripciones v-if="mostrarComponente === 17"/>
+                <EnviarSuscripciones v-if="mostrarComponente === 18"/>
+
+                <!--COMPONENTES VALORES -->
+
+                <CrearSeccion v-if="mostrarComponente === 31"/>
+                <ShowSeccionesNosotros v-if="mostrarComponente === 32"/>
+                <EditSeccionesNosotros v-if="mostrarComponente === 33"/>
 
             </div>
 
@@ -236,11 +303,26 @@ import CrearSlider from "@/components/admin/home/sliderHome/CrearSlider.vue";
 import EditSlider from "@/components/admin/home/sliderHome/EditSlider.vue";
 
 import ShowContactos from "@/components/admin/contactos/ShowContactos.vue";
+
 import ShowLogos from "@/components/admin/logos/ShowLogos.vue";
+
 import ShowProductos from "@/components/admin/productos/ShowProductos.vue";
 import CrearProducto from "@/components/admin/productos/CrearProducto.vue";
 import EditProducto from "@/components/admin/productos/EditProducto.vue";
 import productosImagenes from "@/components/admin/productos/productosImagenes.vue";
+
+import EditBanner from "@/components/admin/home/banner/EditBanner.vue";
+
+import ShowNovedades from "@/components/admin/novedades/ShowNovedades.vue";
+import CrearNovedad from "@/components/admin/novedades/CrearNovedad.vue";
+import EditarNovedad from "@/components/admin/novedades/EditarNovedad.vue";
+
+import ShowSuscripciones from "@/components/admin/suscripciones/ShowSuscripciones.vue";
+import EnviarSuscripciones from "@/components/admin/suscripciones/EnviarSuscripciones.vue";
+
+import ShowSeccionesNosotros from "@/components/admin/empresa/ShowSeccionesNosotros.vue";
+import EditSeccionesNosotros from "@/components/admin/empresa/EditSeccionesNosotros.vue";
+import CrearSeccion from "@/components/admin/empresa/CrearSeccion.vue";
 
 import axios from "axios";
 
@@ -255,7 +337,16 @@ export default {
         CrearProducto,
         EditSlider,
         productosImagenes,
-        EditProducto
+        EditProducto,
+        EditBanner,
+        ShowNovedades,
+        CrearNovedad,
+        EditarNovedad,
+        ShowSuscripciones,
+        EnviarSuscripciones,
+        ShowSeccionesNosotros,
+        EditSeccionesNosotros,
+        CrearSeccion
   
     },
     data(){

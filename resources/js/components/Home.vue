@@ -18,20 +18,19 @@
 
                     <template v-if="isImage(slider.imagen)">
                         <div :style="{
-                        backgroundImage: `url(${getImagen(slider.imagen)})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                        width: '100%',
-                        height: '586px'
-                    }">
+                            backgroundImage: `url(${getImagen(slider.imagen)})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            width: '100%',
+                            height: '586px'
+                        }">
                             <div class="container">
 
                                 <div class="d-flex flex-column">
-                                    <div style="width: 400px;">
-                                        <p id="tituloSlider" style="color: white; padding-top: 177px;">Espatula
-                                            curva
-                                            para balde</p>
+                                    <div>
+                                        <div id="tituloSlider" v-html="slider.texto"
+                                            style="color: white; padding-top: 177px;"></div>
                                     </div>
                                     <div style="margin-top: 124px;">
                                         <template v-if="slider.linkboton !== ''">
@@ -97,20 +96,24 @@
         </div>
 
         <!-- PRODUCTOS DESTACADOS -->
-        <div class="container"  style="margin-top: 80px;">
-            <div class="d-flex justify-content-between">
-                <div>
+        <div class="container" style="margin-top: 80px;">
+            <div class="d-flex justify-content-between row">
+                <div class="col-lg-8">
                     <p class="productosD">Productos destacados</p>
                 </div>
-                <div>
+                <div class="col-lg-4 d-flex justify-content-end">
                     <button type="button" class="btn verTodosButton">Ver todos</button>
                 </div>
             </div>
 
-            <div class="row productos" style="margin-left: 0px; gap: 48px;">
-                <div v-for="producto in productos" :key="producto.id" class="col-lg-3"
-                    style="width: 288px; height: 400px; border: 1px solid black;">
-                    <div :style="{
+            <div class="row productos mt-3" style="margin-left: 0px; gap: 48px;">
+                <div v-for="producto in productos" :key="producto.id" class="col-lg-3 tapaCard"
+                    style="width: 288px; height: 400px;"
+                    @mouseover="showIconsHover(producto.id)" @mouseout="hiddenIconsHover(producto.id)">
+
+                    
+
+                    <div class="imagenProducto" :style="{
                         backgroundImage: `url(${getImagen(producto.imagenes[0].path)})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -119,38 +122,120 @@
                         height: '286px'
                     }">
 
-                        <div class="d-flex justify-content-center" style="padding-top: 30px;">
-                            <img v-if="showIcons" src="../../img/iconoVerProducto.png" alt="Icono">
+                        <div :id="'productoIcono' + producto.id" class="d-flex justify-content-center"
+                            style="padding-top: 120px;">
+
+                            <div class="containerIcono" v-show="showIcons[producto.id]"   @mouseover="changeIcon()" @mouseout="changeIcon2()"
+                                style="width: 50px; height: 50px; padding: 13px; cursor: pointer;">
+                                <svg class="iconoSearch" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" 
+                                    fill="none">
+                                    <path
+                                        d="M22.9937 22.0496C22.7731 21.8297 22.5525 21.6105 22.3326 21.3906C21.4396 20.4982 20.5459 19.6066 19.6491 18.7112L18.1327 17.1975L18.3646 16.9076C20.1175 14.7161 20.9246 12.0058 20.6362 9.27513C20.3554 6.61225 19.0814 4.18809 17.0492 2.44999C15.1488 0.824846 12.7033 -0.0442055 10.1711 0.00173228C7.63069 0.0484231 5.21526 1.01086 3.36829 2.71281C1.47916 4.45393 0.300809 6.80127 0.0500798 9.32333C-0.20065 11.8476 0.495821 14.3787 2.01074 16.4497C3.57912 18.5937 5.67681 19.9462 8.24509 20.4696C11.3728 21.1067 14.292 20.3943 16.9205 18.3505L17.2096 18.1253L17.9528 18.8739C18.2938 19.218 18.6319 19.5584 18.9707 19.8973C19.5068 20.4342 20.0437 20.9704 20.5798 21.5066C21.6346 22.5617 22.7257 23.6529 23.7971 24.7283C24.0938 25.0265 24.3181 25.022 24.4973 24.9783C24.7375 24.9196 24.9114 24.7584 24.9755 24.5347C25.044 24.296 24.9694 24.0354 24.7767 23.8389C24.1879 23.2379 23.581 22.6332 22.9937 22.0488V22.0496ZM16.7097 16.7396C15.0035 18.4363 12.7462 19.3694 10.3518 19.3694C10.3398 19.3694 10.3277 19.3694 10.3157 19.3694C5.35079 19.3498 1.31879 15.2922 1.32857 10.3234C1.33309 7.91582 2.27954 5.65132 3.99323 3.94711C5.6994 2.24967 7.95747 1.31661 10.3541 1.31661C10.3654 1.31661 10.3767 1.31661 10.388 1.31661C15.3536 1.33468 19.3856 5.39226 19.3758 10.3611C19.3713 12.7694 18.4241 15.0347 16.7089 16.7396H16.7097Z"
+                                        :fill="iconoColor" />
+                                </svg>
+                            </div>
                         </div>
 
                     </div>
-                    <div class="d-flex flex-column justify-content-center align-items-center">
+
+                    <div class="d-flex flex-column justify-content-center align-items-center"
+                        :ref="'productoH' + producto.id">
                         <div class="d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="2" viewBox="0 0 27 2"
                                 fill="none">
                                 <path d="M1 1H26" stroke="#E3202B" stroke-width="2" stroke-linecap="round" />
                             </svg>
                         </div>
-                        <div class="ml-2">
+                        <div class="ml-2 col-lg-6">
                             <p class="titleProducto" style="margin-top: 23px;">{{ producto.nombre }}</p>
                         </div>
                     </div>
-
-
                 </div>
-                <div class="col-lg-3">
 
-                </div>
-                <div class="col-lg-3">
-
-                </div>
-                <div class="col-lg-3">
-
-                </div>
 
             </div>
+        </div>
+
+
+
+
+
+        <!--- SECCION NOSOTROS-->
+
+        <div class="container-fluid" style="margin-top: 80px;">
+
+            <div class="row empresa">
+                <div class="col-lg-6 imgEmpresa">
+                    <div :style="{
+                        backgroundImage: `url(${getImagen(this.imagenBanner)})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        width: '100%',
+                        height: '470px'
+                    }">
+
+                    </div>
+
+                </div>
+                <div class="col-lg-6 infoEmpresa">
+                    <p class="titulo" >{{ this.banner.titulo }}</p>
+                    <div class="infotext"  style="width: 100%;">
+                        <div v-html="this.banner.texto" class="text"></div>
+                    </div>
+                    <router-link class="route" to="/empresa"
+                        :style="{ fontWeight: isRouteActive('/empresa') ? '700' : '500' }">
+                        <button type="button" class="btn masInformacion2" >Mas información</button>
+                    </router-link>
+                </div>
+            </div>
+        </div>
+
+        <!--- SECCION NOVEDADES-->
+
+        <div class="container" style="margin-bottom: 98px;">
+            <div class="d-flex justify-content-between row" style="margin-top: 80px;">
+                <div class="col-lg-8">
+                    <p class="productosD">Novedades</p>
+                </div>
+                <div class="col-lg-4 d-flex justify-content-end">
+                    <button type="button" class="btn verTodosButton">Ver todos</button>
+                </div>
+            </div>
+
+            <div class="row" style="gap:60px; margin-top: 20px;">
+                <div class="card col-lg-3" style="width: 392px; height: 603px; border: none;"
+                    v-for="novedad in novedades" :key="novedad.id">
+                        <div style="height: 392px;">
+                            <img :src="getImagen(novedad.imagen)" class="card-img-top" alt="..."
+                                style="width: 100%; height: 100%; border-radius: 0%;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-etiqueta">{{ novedad.etiqueta }}</h5>
+                            <h5 class="card-title">{{ novedad.titulo }}</h5>
+                            <p class="card-text" style="height: 40px;">{{ novedad.epigrafe }}</p>
+                            <div class="d-flex justify-content-between mt-5">
+                                <div>
+                                    <p class="card-link">Leer más</p>
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z"
+                                            fill="#414047" />
+                                    </svg>
+                                </div>
+    
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+
 
         </div>
+
+
 
 
     </div>
@@ -162,7 +247,6 @@
 import axios from 'axios';
 import { defineComponent } from 'vue';
 
-
 export default defineComponent({
 
     name: 'Home',
@@ -171,8 +255,11 @@ export default defineComponent({
             currentSliderIndex: 0,
             sliders: [],
             productos: [],
-            showIcons: false,
-            hovered: false
+            banner: [],
+            novedades: [],
+            imagenBanner: '',
+            showIcons: {},
+            iconoColor: 'white'
 
 
         };
@@ -180,20 +267,51 @@ export default defineComponent({
     },
 
     methods: {
+        changeIcon2(){
+            this.iconoColor = 'white'
+        },
 
-        changeIcon() {
-            this.hovered = true;
+        changeIcon(){
+            this.iconoColor = 'red'
         },
-        resetIcon() {
-            this.hovered = false;
+
+        showIconsHover(productoId) {
+            this.showIcons[productoId] = true;
         },
+        hiddenIconsHover(productoId) {
+            this.showIcons[productoId] = false;
+        },
+
+        obtenerNovedades() {
+            axios.get(`/api/obtenerNovedades`)
+                .then(response => {
+                    console.log(response.data, '?')
+                    this.novedades = response.data;
+                    this.novedades = this.novedades.filter(novedad => novedad.destacado === 1);
+
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+
+        obtenerBannerInformacion() {
+            axios.get(`/api/obtenerBanner`)
+                .then(response => {
+                    this.banner = response.data[0];
+                    this.imagenBanner = response.data[0].imagen;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+
         isImage(url) {
             if (url) {
                 const extension = url.split('.').pop().toLowerCase();
                 return ['jpg', 'jpeg', 'png', 'gif'].includes(extension);
             }
         },
-
 
         setCurrentSlider(texto, index) {
             $('.textoSlider').html(texto);
@@ -208,7 +326,6 @@ export default defineComponent({
         obtenerSlidersHome() {
             axios.get('/api/obtenerSliders')
                 .then(response => {
-                    console.log(response)
                     this.sliders = response.data;
 
                 })
@@ -220,7 +337,6 @@ export default defineComponent({
         obtenerProductos() {
             axios.get('/api/obtenerProductos')
                 .then(response => {
-                    console.log(response)
                     this.productos = response.data;
                     this.productos = this.productos.filter(producto => producto.destacado === 1);
 
@@ -243,6 +359,8 @@ export default defineComponent({
     mounted() {
         this.obtenerSlidersHome();
         this.obtenerProductos();
+        this.obtenerBannerInformacion();
+        this.obtenerNovedades();
     }
 });
 
@@ -307,6 +425,7 @@ export default defineComponent({
     font-weight: 400;
     line-height: normal;
     border-radius: 0%;
+    height: 41px;
 }
 
 .verTodosButton:hover {
@@ -334,7 +453,152 @@ export default defineComponent({
     line-height: 25px;
 }
 
-.productos{
+.productos {
     gap: 40px;
+}
+
+
+
+
+.text {
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+
+}
+
+
+.infotext {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-right: 89px;
+    width: 650px;
+    color: black
+}
+
+.titulo {
+    margin-top: 69px;
+    color: #000;
+    font-family: Inter;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.masInformacion2 {
+    margin-top: 40px;
+    border-radius: 0%;
+    display: inline-flex;
+    padding: 11px 25px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: var(--Rojo, #E3202B);
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.infoEmpresa {
+    padding-left: 89px;
+    background-color: #F5F5F5;
+    color: white;
+
+}
+
+.imgEmpresa img {
+    width: 100%;
+    height: 100%;
+
+}
+
+.imgEmpresa {
+    height: 470px;
+    padding: 0px;
+}
+
+
+.card-etiqueta {
+    color: var(--Rojo, #E3202B);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+    /* 19.6px */
+    text-transform: uppercase;
+}
+
+.card-title {
+    color: #000;
+    font-family: Inter;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    /* 32.2px */
+}
+
+.card-text {
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.card-link {
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.containerIcono{
+    background: var(--Rojo, #E3202B);
+}
+
+.containerIcono:hover{
+    background: #F2F2F2;
+
+}
+.containerIcono:hover .iconoSearch{
+    color: #E3202B;
+}
+
+.tapaCard:hover{
+    background: rgba(205, 202, 202, 0.25);
+mix-blend-mode: multiply;
+}
+
+.tapaCard:hover .imagenProducto{
+    background: rgba(205, 202, 202, 0.25);
+    mix-blend-mode: multiply;
+
+}
+
+@media screen and (max-width: 400px) {
+
+    .card {
+        width: 346px;
+    }
+
+    .titulo {
+        font-size: 20px;
+    }
+
+    .masInformacion2 {
+        width: 100px;
+    }
 }
 </style>

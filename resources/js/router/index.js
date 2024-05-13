@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 import PanelAdmin from '../views/admin/panel/panelView.vue';
 import LoginView from '../views/admin/login/LoginView.vue';
-import Navbar from '../components/Navbar.vue';
+import Empresa from '../components/Empresa.vue';
 import Home from '../components/Home.vue';
 
 
@@ -13,7 +13,13 @@ const routes = [
     },
     {
         path: '/home',
+        name: 'Home',
         component: Home
+    },
+    {
+        path: '/empresa',
+        name: 'Empresa',
+        component: Empresa
     },
     {
         path: '/admin/login',

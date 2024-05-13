@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +49,28 @@ Route::post('/api/updateProducto', [ProductosController::class, 'updateProducto'
 Route::get('/api/obtenerProducto/{idProducto}', [ProductosController::class, 'obtenerProducto']);
 Route::post('/api/guardarImagenProducto', [ProductosController::class, 'guardarImagenProducto']);
 Route::post('/api/eliminarImagen', [ProductosController::class, 'eliminarImagen']);
+
+
+//BANNERS
+Route::get('/api/obtenerBanner', [AdminController::class, 'obtenerBanner']);
+Route::post('/api/updateBanner', [AdminController::class, 'updateBanner']);
+
+//NOVEDADES
+Route::get('/api/obtenerNovedades', [AdminController::class, 'obtenerNovedades']);
+Route::post('/api/crearNovedad', [AdminController::class, 'crearNovedad']);
+Route::post('/api/updateNovedad', [AdminController::class, 'updateNovedad']);
+Route::get('/api/obtenerNovedad/{idNovedad}', [AdminController::class, 'obtenerNovedad']);
+Route::post('/api/deleteNovedad', [AdminController::class, 'deleteNovedad']);
+
+//EMAILS
+Route::post('/api/enviarMensajeSub', [EmailsController::class, 'enviarMensajeSub']);
+Route::post('/api/agregarSuscripcion', [SuscripcionController::class, 'agregarSuscripcion']);
+Route::get('/api/obtenerSuscripciones', [SuscripcionController::class, 'obtenerSuscripciones']);
+Route::get('/api/deleteSuscripcion/{idSuscripcion}', [SuscripcionController::class, 'deleteSuscripcion']);
+
+//VALORES
+Route::get('/api/obtenerSecciones', [AdminController::class, 'obtenerSecciones']);
+Route::post('/api/updateSeccion', [AdminController::class, 'updateSeccion']);
+Route::get('/api/obtenerSeccion/{idSeccion}', [AdminController::class, 'obtenerSeccion']);
+Route::post('/api/deleteValor', [AdminController::class, 'deleteSeccion']);
+Route::post('/api/crearSeccion', [AdminController::class, 'crearSeccion']);

@@ -10,12 +10,16 @@ export default createStore({
     alertaClase: null,
     idSlider: null,
     idProducto: null,
+    idNovedad: null,
 
     inputValue: localStorage.getItem('inputValue') || false,
     summer: null,
 
   },
   mutations: {
+    setNovedadId(state,idNovedad){
+      state.idNovedad = idNovedad
+    },
     setProductoId(state,idProducto){
       state.idProducto = idProducto
     },
@@ -55,6 +59,9 @@ export default createStore({
   },
  
   getters: {
+    getIdNovedad(state){
+      return state.idNovedad;
+    },
     getIdProducto(state){
       return state.idProducto;
     },

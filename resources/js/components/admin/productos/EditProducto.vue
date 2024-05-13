@@ -224,8 +224,8 @@ export default {
 
 <style scoped>
 .form-check-input:checked {
-    background-color: rgba(51, 68, 127, 1);
-    border-color: rgba(51, 68, 127, 1);
+    background-color: #7F7F7F;
+    border-color: #7F7F7F;
 }
 
 * {
