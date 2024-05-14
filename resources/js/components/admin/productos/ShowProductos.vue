@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
+    <div class="container" style="overflow-y:scroll; max-height: 500px;">
 
         <div class="w-100 border-bottom d-flex justify-content-between">
-            <h1>PRODUCTOS</h1>
+            <h1>PRODUCTOS({{this.cantidadProductos}})</h1>
 
             <button @click="crearProducto()" type="button" class="btn mb-1" id="crearProducto"
                 style="background-color:  rgb(0, 0, 0,0.5); color: white;">Crear Producto</button>
@@ -109,8 +109,8 @@ export default {
         obtenerProductos() {
             axios.get('/api/obtenerProductos')
                 .then(response => {
-                    console.log(response.data)
                     this.productos = response.data
+                    this.cantidadProductos = this.productos.length;
                 })
                 .catch(error => {
                     console.error(error);

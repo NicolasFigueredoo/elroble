@@ -1,11 +1,11 @@
 <template>
-    <div class="container">
+    <div class="container" style="overflow-y:scroll; max-height: 500px;">
 
         <div class="w-100 border-bottom d-flex justify-content-between">
-            <h1>GALERIA DE {{ this.nombre }} </h1>
+            <h1>Galeria de {{ this.nombre }} </h1>
 
             <button type="button" class="btn mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                id="crearProducto" style="background-color:  rgb(0, 0, 0,0.5); color: white;">Cargar Imagen</button>
+             style="background-color:  rgb(0, 0, 0,0.5); color: white;">Cargar Imagen</button>
         </div>
 
         <table class="table table-bordered mt-3">
@@ -57,7 +57,7 @@
                         <input type="text" class="form-control" id="orden">
                     </div>
                     <div>
-                        <label class="form-label">Imagen</label>
+                        <label class="form-label">Imagen 454x448</label>
                         <input @change="guardarImagen()" type="file" ref="imagenProducto" class="form-control" id="imagen">
 
                     </div>

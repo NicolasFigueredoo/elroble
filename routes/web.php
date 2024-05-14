@@ -62,6 +62,14 @@ Route::post('/api/updateNovedad', [AdminController::class, 'updateNovedad']);
 Route::get('/api/obtenerNovedad/{idNovedad}', [AdminController::class, 'obtenerNovedad']);
 Route::post('/api/deleteNovedad', [AdminController::class, 'deleteNovedad']);
 
+//NOVEDADES
+Route::get('/api/obtenerServicios', [AdminController::class, 'obtenerServicios']);
+Route::post('/api/deleteServicio', [AdminController::class, 'deleteServicio']);
+Route::post('/api/crearServicio', [AdminController::class, 'crearServicio']);
+Route::post('/api/updateServicio', [AdminController::class, 'updateServicio']);
+Route::get('/api/obtenerServicio/{idNovedad}', [AdminController::class, 'obtenerServicio']);
+
+
 //EMAILS
 Route::post('/api/enviarMensajeSub', [EmailsController::class, 'enviarMensajeSub']);
 Route::post('/api/agregarSuscripcion', [SuscripcionController::class, 'agregarSuscripcion']);

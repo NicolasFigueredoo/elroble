@@ -74,13 +74,14 @@
               style="background: #E3202B;">
 
               <div>
-                <router-link class="route" to="/empresa"
-                        >
-                        <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/empresa') ? '700' : '500' }">Empresa</p>
-                      </router-link>
+                <router-link class="route" to="/empresa">
+                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/empresa') ? '700' : '500' }">Empresa</p>
+                </router-link>
               </div>
               <div>
-                <p class="textoNavbar2">Productos</p>
+                <router-link class="route" to="/productos">
+                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/productos') ? '700' : '500' }">Productos</p>
+                </router-link>
               </div>
               <div>
                 <p class="textoNavbar2">Servicios</p>

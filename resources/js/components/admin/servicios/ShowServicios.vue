@@ -2,10 +2,10 @@
     <div class="container" style="overflow-y:scroll; max-height: 500px;">
 
         <div class="w-100 border-bottom d-flex justify-content-between">
-            <h1>NOVEDADES</h1>
+            <h1>SERVICIOS</h1>
 
-            <button @click="crearNovedad()" type="button" class="btn mb-1"
-                 id="crearNovedad"   style="background-color:  #7F7F7F; color: white;">Crear Novedad</button>
+            <button @click="crearServicio()" type="button" class="btn mb-1"
+                 id="crearServicio"   style="background-color:  #7F7F7F; color: white;">Crear Servicio</button>
         </div>
         <div class="input-group mb-3 mt-2">
             <input type="text" class="form-control" placeholder="Buscar..." v-model="search" style="border-radius: 0%;">
@@ -14,27 +14,23 @@
             <thead>
                 <tr>
                     <th scope="col" class="col-lg-1 encabezado">Orden</th>
-                    <th scope="col" class="col-lg-2 encabezado">Imagen</th>
-                    <th scope="col" class="col-lg-2 encabezado">Etiqueta</th>
                     <th scope="col" class="col-lg-2 encabezado">Título</th>
-                    <th scope="col" class="col-lg-2 encabezado">Epígrafe</th>
+                    <th scope="col" class="col-lg-2 encabezado">Imagen</th>
                     <th scope="col" class="col-lg-1 encabezado">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="novedad in filteredNovedades" :key="novedad.id">
-                    <td>{{ novedad.orden }}</td>
-                    <td style="height:150px;" >
-                            <img class="imagen" :src="getImagen(novedad.imagen)" alt="">
+                <tr v-for="servicio in filteredServicios" :key="servicio.id">
+                    <td>{{ servicio.orden }}</td>
+                    <td>{{ servicio.titulo }}</td>
+                    <td style="height:100px;" >
+                            <img class="imagen" :src="getImagen(servicio.imagen)" alt="">
                     </td>
-                    <td>{{ novedad.etiqueta }}</td>
-                    <td>{{ novedad.titulo }}</td>
-                    <td>{{ novedad.epigrafe }}</td>
 
                     <td >
                         <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-sm" style="background-color: #7F7F7F; "
-                                @click="editarNovedad(41, novedad.id)">
+                                @click="editarServicio(53, servicio.id)">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15"
                                     style="cursor: pointer">
                                     <path fill="white"
@@ -42,7 +38,7 @@
                                 </svg>
                             </button>
     
-                            <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px;  border:0px " @click="eliminarNovedad(novedad.id)">
+                            <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px;  border:0px " @click="eliminarServicio(servicio.id)">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="15"
                                     style="cursor: pointer;">
                                     <path fill="white"
@@ -70,7 +66,7 @@ export default {
 
     data() {
         return {
-            novedades: [],
+            servicios: [],
             search: ''
         }
     },
@@ -79,37 +75,36 @@ export default {
         idComponente() {
             return this.$store.getters['getMostrarComponente'];
         },
-        filteredNovedades() {
-            return this.novedades.filter(novedad => {
-            return novedad.texto.toLowerCase().includes(this.search.toLowerCase());
+        filteredServicios() {
+            return this.servicios.filter(servicio => {
+            return servicio.titulo.toLowerCase().includes(this.search.toLowerCase());
     });
   }
     },
     methods: {
         isImage(url) {
             if(url){
-
                 const extension = url.split('.').pop().toLowerCase();
                 return ['mp4','mov'].includes(extension);
             }
         },
 
-        eliminarNovedad(idNovedad){
-        axios.post('/api/deleteNovedad',{
-            idNovedad: idNovedad
+        eliminarServicio(idServicio){
+        axios.post('/api/deleteServicio',{
+            idServicio: idServicio
         })
                 .then(response => {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Novedad eliminada con éxito');  
-                    this.obtenerNovedades();
+                    this.$store.commit('setMensajeAlerta', 'Servicio eliminado con éxito');  
+                    this.obtenerServicios();
                 })
                 .catch(error => {
                     console.error(error);
                 });
     },
-        crearNovedad(){
-            this.$store.commit('mostrarComponente', 42);
+        crearServicio(){
+            this.$store.commit('mostrarComponente', 52);
         },
         getImagen(fileName) {
             if(fileName){
@@ -117,14 +112,14 @@ export default {
                 return '/api/getImage/' + filePath
             }
         },
-        editarNovedad(idComponente, idNovedad) {
-            this.$store.commit('setNovedadId', idNovedad);
+        editarServicio(idComponente, idServicio) {
+            this.$store.commit('setServicioId', idServicio);
             this.$store.commit('mostrarComponente', idComponente);
         },
-        obtenerNovedades() {
-            axios.get('/api/obtenerNovedades')
+        obtenerServicios() {
+            axios.get('/api/obtenerServicios')
                 .then(response => {
-                    this.novedades = response.data
+                    this.servicios = response.data
                     
                 })
                 .catch(error => {
@@ -133,7 +128,7 @@ export default {
         }
     },
     mounted() {
-        this.obtenerNovedades();
+        this.obtenerServicios();
     }
 }
 </script>

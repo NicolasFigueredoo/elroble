@@ -60,9 +60,7 @@
 
                             <div class="d-flex flex-column">
                                 <div style="width: 400px;">
-                                    <p id="tituloSlider" style="color: white; padding-top: 177px;">Espatula
-                                        curva
-                                        para balde</p>
+                                    <div id="tituloSlider" style="color: white; padding-top: 177px;" v-html="slider.texto"></div>
                                 </div>
                                 <div style="margin-top: 124px;">
                                     <template v-if="slider.linkboton !== ''">
@@ -345,9 +343,6 @@ export default defineComponent({
                     console.error(error);
                 });
         },
-
-
-
         getImagen(fileName) {
             if (fileName) {
                 const filePath = fileName.split('/').pop();
@@ -452,13 +447,6 @@ export default defineComponent({
     font-weight: 400;
     line-height: 25px;
 }
-
-.productos {
-    gap: 40px;
-}
-
-
-
 
 .text {
     color: #000;

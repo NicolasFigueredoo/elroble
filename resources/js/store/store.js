@@ -11,12 +11,23 @@ export default createStore({
     idSlider: null,
     idProducto: null,
     idNovedad: null,
-
+    idValor: null,
+    idServicio: null,
+    selectedProductId: null,
     inputValue: localStorage.getItem('inputValue') || false,
     summer: null,
 
   },
   mutations: {
+    setServicioId(state, idServicio) {
+      state.idServicio = idServicio;
+  },
+    setSelectedProductId(state, productId) {
+      state.selectedProductId = productId;
+  },
+    setValorId(state,idValor){
+      state.idValor = idValor
+    },
     setNovedadId(state,idNovedad){
       state.idNovedad = idNovedad
     },
@@ -59,6 +70,15 @@ export default createStore({
   },
  
   getters: {
+    getIdServicio(state) {
+      return state.idServicio;
+    },
+    getSelectedProductId(state) {
+      return state.selectedProductId;
+    },
+    getIdValor(state){
+      return state.idValor;
+    },
     getIdNovedad(state){
       return state.idNovedad;
     },

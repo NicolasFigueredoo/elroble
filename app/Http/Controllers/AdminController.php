@@ -253,7 +253,68 @@ class AdminController extends Controller
         return response()->json($novedad);
     }
 
+    //SERVICIOS
+    public function obtenerServicios()
+    {
+        $servicios = Servicio::orderBy('orden', 'asc')->get();
+        return response()->json($servicios);
+    }
 
+    public function obtenerServicio($idServicio)
+    {
+        $servicio = Servicio::find($idServicio);
+        return response()->json($servicio);
+    }
+
+    public function crearServicio(Request $request)
+    {
+        $servicio = new Servicio();
+        $servicio->orden = $request->orden;
+        $servicio->titulo = $request->titulo;        
+        $servicio->texto = $request->texto;
+        if ($request->hasFile('foto')) {
+        
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('foto')->store('fotos');
+            $servicio->imagen = $photoPath;
+        }
+
+        $servicio->save();
+
+        return response()->json($servicio);
+    }
+
+    public function updateServicio(Request $request)
+    {
+        $servicio = Servicio::find($request->idServicio);
+        $servicio->orden = $request->orden;
+        $servicio->titulo = $request->titulo;        
+        $servicio->texto = $request->texto;
+
+        if ($request->hasFile('foto')) {
+        
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('foto')->store('fotos');
+            $servicio->imagen = $photoPath;
+        }
+
+        $servicio->save();
+
+        return response()->json($servicio);
+    }
+
+    public function deleteServicio(Request $request)
+    {
+        $servicio = Servicio::find($request->idServicio);
+        $servicio->delete();
+        return response()->json($servicio);
+    }
     //VALORES
     public function obtenerSecciones()
     {
@@ -273,7 +334,15 @@ class AdminController extends Controller
         $seccion->orden = $request->orden;
         $seccion->titulo = $request->titulo;
         $seccion->texto = $request->texto;
-        $seccion->icono = $request->icono;
+        if ($request->hasFile('imagen')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('imagen')->store('fotos');
+            $seccion->imagen = $photoPath;
+        }
         $seccion->save();
 
         return response()->json(['message' => 'Datos subidos correctamente'], 200);
@@ -293,7 +362,17 @@ class AdminController extends Controller
         $seccion->orden = $request->orden;
         $seccion->titulo = $request->titulo;
         $seccion->texto = $request->texto;
-        $seccion->icono = $request->icono;
+        if ($request->hasFile('imagen')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('imagen')->store('fotos');
+            $seccion->imagen = $photoPath;
+        }
+        
+
         $seccion->save();
 
         return response()->json(['message' => 'Datos subidos correctamente'], 200);

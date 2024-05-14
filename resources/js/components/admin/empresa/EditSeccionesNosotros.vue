@@ -18,12 +18,11 @@
             </div>
             <div class="row mt-3">
                 <div class="col-md-6">
-                    <label class="form-label">Icono</label>
-                    <input type="text" class="form-control" id="icono">
+                <label class="form-label">Imagen (Tamaño recomendado 80x80)</label>
+                <input type="file" ref="fotoSlider" class="form-control" id="imgs" @change="guardarFoto()">
                 </div>
-                <div class="col-md-4">
-                    <label class="form-label">Icono actual</label>
-                    <div v-html="this.seccion.icono"></div>
+                <div class="col-md-4" style="">
+                    <img :src="getImagen(this.seccion.imagen)" alt="">
                 </div>
             </div>
             <div class="mb-3 mt-3">
@@ -33,7 +32,7 @@
 
             <div class="w-100 d-flex justify-content-end mb-5">
                 <button @click="updateSeccion()" type="btn" class="btn"
-                    style="background-color: rgb(52, 68, 127); color: white;">Guardar</button>
+                    style="background-color: #7F7F7F; color: white;">Guardar</button>
             </div>
         </form>
 
@@ -53,37 +52,28 @@ export default {
 
     data() {
         return {
-            seccion: []
+            seccion: [],
+            foto: null
         }
 
     },
     computed: {
         idSeccion() {
-            return this.$store.getters['getIdSeccion'];
+            return this.$store.getters['getIdValor'];
         }
     },
     methods: {
+        guardarFoto() {
+            const file = this.$refs.fotoSlider;
+            this.foto = file.files[0]
+        },
         updateSeccion() {
             let formData = new FormData();
             formData.append('idSeccion', this.idSeccion);
             formData.append('orden', $("#orden").val());
             formData.append('titulo', $("#titulo").val());
-            if($('#icono').val() == ''){
-                formData.append('icono', this.seccion.icono);
-
-            }else{
-
-            const parser = new DOMParser();
-            const svgDOM = parser.parseFromString($('#icono').val(), 'image/svg+xml');
-      
-            svgDOM.documentElement.classList.add('svgIcono');
-      
-            const serializer = new XMLSerializer();
-            const svgString = serializer.serializeToString(svgDOM.documentElement);
-
-            formData.append('icono', svgString);
-            }
             formData.append('texto', $('#editor').summernote('code').toString());
+            formData.append('imagen', this.foto);
 
             axios.post('/api/updateSeccion', formData, {})
                 .then(response => {
@@ -109,6 +99,12 @@ export default {
             noteBar.find('[data-toggle]').each(function () {
                 $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
             });
+        },
+        getImagen(fileName) {
+            if(fileName){
+                const filePath = fileName.split('/').pop();
+                return '/api/getImage/' + filePath
+            }
         },
         obtenerSeccionInformacion() {
             axios.get(`/api/obtenerSeccion/${this.idSeccion}`)

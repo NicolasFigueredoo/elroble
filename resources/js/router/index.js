@@ -2,24 +2,30 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 import PanelAdmin from '../views/admin/panel/panelView.vue';
 import LoginView from '../views/admin/login/LoginView.vue';
-import Empresa from '../components/Empresa.vue';
-import Home from '../components/Home.vue';
+import HomeView from '../views/HomeView.vue';
+import ProductosView from '../views/ProductosView.vue';
+import EmpresaView from '../views/EmpresaView.vue';
 
 
 const routes = [
     {
         path: '/',
-        component: Home
+        component: HomeView
     },
     {
         path: '/home',
-        name: 'Home',
-        component: Home
+        name: 'HomeView',
+        component: HomeView
     },
     {
         path: '/empresa',
-        name: 'Empresa',
-        component: Empresa
+        name: 'EmpresaView',
+        component: EmpresaView
+    },
+    {
+        path: '/productos',
+        name: 'ProductosView',
+        component: ProductosView
     },
     {
         path: '/admin/login',

@@ -1,10 +1,13 @@
 <template>
-    <div class="container">
+    <div class="container" style="overflow-y:scroll; max-height: 500px;">
 
         <div class="w-100 border-bottom d-flex justify-content-between">
             <h1>VALORES</h1>
             <button @click="crearValores()" type="button" class="btn mb-1"
                  id="crearServicio"   style="background-color: #7F7F7F; color: white;">Crear valores</button>
+        </div>
+        <div class="input-group mb-3 mt-2">
+            <input type="text" class="form-control" placeholder="Buscar..." v-model="search" style="border-radius: 0%;">
         </div>
 
         <table class="table table-bordered mt-5">
@@ -13,19 +16,21 @@
                     <th scope="col" class="col-sm-1 encabezado">Orden</th>
                     <th scope="col" class="encabezado">Titulo</th>
                     <th scope="col" class="encabezado">Texto</th>
-                    <th scope="col" class="col-sm-1  encabezado">Icono</th>
+                    <th scope="col" class="col-sm-1  encabezado">Imagen</th>
                     <th scope="col" class="col-sm-1 encabezado">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="seccion in secciones" :key="seccion.id">
+                <tr v-for="seccion in filteredSecciones" :key="seccion.id">
                     <th >{{ seccion.orden }}</th>
                     <th >{{ seccion.titulo }}</th>
                     <td ><div v-html="seccion.texto"></div></td>
-                    <td ><div v-html="seccion.icono"></div></td>
+                    <td ><img class="imagen" :src="getImagen(seccion.imagen)" alt=""></td>
 
                     <td>
-                        <button type="button" class="btn btn-sm" style="background-color: rgb(52, 68, 127);" @click="editarSeccion(33, seccion.id)">
+                        <div class="d-flex justify-content-center">
+
+                        <button type="button" class="btn btn-sm" style="background-color: #7F7F7F" @click="editarSeccion(33, seccion.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15"
                                 style="cursor: pointer">
                                 <path fill="white"
@@ -40,6 +45,7 @@
                                     d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
                                 </svg>
                         </button>
+                        </div>
 
               
                     </td>
@@ -61,12 +67,27 @@ export default {
 
     data(){
         return{
-            secciones:[]
+            secciones:[],
+            search: ''
         }
+    },
+
+    computed:{
+        filteredSecciones() {
+            return this.secciones.filter(seccion => {
+            return seccion.titulo.toLowerCase().includes(this.search.toLowerCase());
+            });
+  }
     },
     
 
 methods:{
+    getImagen(fileName) {
+            if(fileName){
+                const filePath = fileName.split('/').pop();
+                return '/api/getImage/' + filePath
+            }
+        },
     crearValores(){
             this.$store.commit('mostrarComponente', 31);
         },
@@ -85,8 +106,8 @@ methods:{
                 });
     
         },
-    editarSeccion(idComponente, isSeccion){
-        this.$store.commit('setSeccionId', isSeccion);
+    editarSeccion(idComponente, idValor){
+        this.$store.commit('setValorId', idValor);
         this.$store.commit('mostrarComponente', idComponente);
     },
     obtenerSecciones(){

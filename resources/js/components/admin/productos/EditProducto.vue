@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" style="overflow-y:scroll; max-height: 500px;">
 
         <div class="w-100 border-bottom">
             <h1>EDITAR PRODUCTO</h1>
