@@ -18,7 +18,7 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-6 infoEmpresa" style="padding-left: 80px; padding-top: 80px;">
+                    <div class="col-lg-6 infoEmpresa" style="padding-top: 80px;">
                         <p class="titulo">{{ this.banner.titulo }}</p>
                         <div class="infotext" style="width: 100%;">
                             <div v-html="this.banner.texto" class="text"></div>
@@ -122,6 +122,10 @@ export default defineComponent({
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+
+.infoEmpresa{
+    padding-left: 80px;
+}
 .titulo {
     color: #000;
     font-family: Inter;
@@ -178,5 +182,14 @@ export default defineComponent({
     font-style: normal;
     font-weight: 400;
     line-height: 22px;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+
+    .infoEmpresa{
+    padding-left: 0px;
+}
 }
 </style>

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -62,12 +63,28 @@ Route::post('/api/updateNovedad', [AdminController::class, 'updateNovedad']);
 Route::get('/api/obtenerNovedad/{idNovedad}', [AdminController::class, 'obtenerNovedad']);
 Route::post('/api/deleteNovedad', [AdminController::class, 'deleteNovedad']);
 
-//NOVEDADES
+//FERIAS
+Route::get('/api/obtenerFerias', [AdminController::class, 'obtenerFerias']);
+Route::post('/api/crearFeria', [AdminController::class, 'crearFeria']);
+Route::post('/api/updateFeria', [AdminController::class, 'updateFeria']);
+Route::get('/api/obtenerFeria/{idFeria}', [AdminController::class, 'obtenerFeria']);
+Route::post('/api/deleteFeria', [AdminController::class, 'deleteFeria']);
+Route::post('/api/guardarImagenFeria', [AdminController::class, 'guardarImagenFeria']);
+Route::post('/api/eliminarImagenFeria', [AdminController::class, 'eliminarImagenFeria']);
+
+//SERVICIOS
 Route::get('/api/obtenerServicios', [AdminController::class, 'obtenerServicios']);
 Route::post('/api/deleteServicio', [AdminController::class, 'deleteServicio']);
 Route::post('/api/crearServicio', [AdminController::class, 'crearServicio']);
 Route::post('/api/updateServicio', [AdminController::class, 'updateServicio']);
 Route::get('/api/obtenerServicio/{idNovedad}', [AdminController::class, 'obtenerServicio']);
+
+//DESCARGAS
+Route::get('/api/obtenerDescargas', [AdminController::class, 'obtenerDescargas']);
+Route::post('/api/deleteDescarga', [AdminController::class, 'deleteDescarga']);
+Route::post('/api/crearDescarga', [AdminController::class, 'crearDescarga']);
+Route::post('/api/updateDescarga', [AdminController::class, 'updateDescarga']);
+Route::get('/api/obtenerDescarga/{idDescarga}', [AdminController::class, 'obtenerDescarga']);
 
 
 //EMAILS
@@ -82,3 +99,14 @@ Route::post('/api/updateSeccion', [AdminController::class, 'updateSeccion']);
 Route::get('/api/obtenerSeccion/{idSeccion}', [AdminController::class, 'obtenerSeccion']);
 Route::post('/api/deleteValor', [AdminController::class, 'deleteSeccion']);
 Route::post('/api/crearSeccion', [AdminController::class, 'crearSeccion']);
+
+//VIDEOS
+Route::get('/api/obtenerVideos', [AdminController::class, 'obtenerVideos']);
+Route::post('/api/updateVideo', [AdminController::class, 'updateVideo']);
+Route::get('/api/obtenerVideo/{idVideo}', [AdminController::class, 'obtenerVideo']);
+Route::post('/api/deleteVideo', [AdminController::class, 'deleteVideo']);
+Route::post('/api/crearVideo', [AdminController::class, 'crearVideo']);
+
+
+//descargas
+Route::get('/api/descargarArchive/{idDescarga}', [AdminController::class, 'descargarArchive']);

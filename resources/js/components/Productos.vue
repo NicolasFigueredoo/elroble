@@ -2,10 +2,9 @@
     <div>
 
         <div class="container">
-            <div class="row" style="gap: 5px; row-gap: 25px; margin-top: 42px;">
-                <div v-for="producto in productosMostrados" :key="producto.id" class="col-lg-3 tapaCard"
-                    style="width: 278px; height: 400px;" @mouseover="showIconsHover(producto.id)"
-                    @mouseout="hiddenIconsHover(producto.id)">
+            <div class="row" style="justify-content: space-around; margin-top: 42px;">
+                <div v-for="producto in productosMostrados" :key="producto.id" class="col-lg-3 tapaCard" style="width: 288px; height: 400px;"
+                @mouseover="showIconsHover(producto.id)" @mouseout="hiddenIconsHover(producto.id)">
 
 
 

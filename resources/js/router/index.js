@@ -5,6 +5,12 @@ import LoginView from '../views/admin/login/LoginView.vue';
 import HomeView from '../views/HomeView.vue';
 import ProductosView from '../views/ProductosView.vue';
 import EmpresaView from '../views/EmpresaView.vue';
+import ServiciosView from '../views/ServiciosView.vue';
+import DescargasView from '../views/DescargasView.vue';
+import NovedadesView from '../views/NovedadesView.vue';
+import FeriasView from '../views/FeriasView.vue';
+import VideosView from '../views/VideosView.vue';
+import ContactosView from '../views/ContactoView.vue';
 
 
 const routes = [
@@ -26,6 +32,36 @@ const routes = [
         path: '/productos',
         name: 'ProductosView',
         component: ProductosView
+    },
+    {
+        path: '/servicios',
+        name: 'ServiciosView',
+        component: ServiciosView
+    },
+    {
+        path: '/descargas',
+        name: 'DescargasView',
+        component: DescargasView
+    },
+    {
+        path: '/novedades',
+        name: 'NovedadesView',
+        component: NovedadesView
+    },
+    {
+        path: '/ferias',
+        name: 'FeriasView',
+        component: FeriasView
+    },
+    {
+        path: '/videos',
+        name: 'VideosView',
+        component: VideosView
+    },
+    {
+        path: '/contactos',
+        name: 'ContactosView',
+        component: ContactosView
     },
     {
         path: '/admin/login',

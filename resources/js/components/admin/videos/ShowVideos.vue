@@ -2,10 +2,10 @@
     <div class="container" >
 
         <div class="w-100 border-bottom d-flex justify-content-between">
-            <h1>SERVICIOS</h1>
+            <h1>VIDEOS</h1>
 
-            <button @click="crearServicio()" type="button" class="btn mb-1"
-                 id="crearServicio"   style="background-color:  #7F7F7F; color: white;">Crear Servicio</button>
+            <button @click="crearVideo()" type="button" class="btn mb-1"
+                 id="crearVideo"   style="background-color:  #7F7F7F; color: white;">Crear Video</button>
         </div>
         <div class="input-group mb-3 mt-2">
             <input type="text" class="form-control" placeholder="Buscar..." v-model="search" style="border-radius: 0%;">
@@ -15,22 +15,17 @@
                 <tr>
                     <th scope="col" class="col-lg-1 encabezado">Orden</th>
                     <th scope="col" class="col-lg-2 encabezado">Título</th>
-                    <th scope="col" class="col-lg-2 encabezado">Imagen</th>
                     <th scope="col" class="col-lg-1 encabezado">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="servicio in filteredServicios" :key="servicio.id">
-                    <td>{{ servicio.orden }}</td>
-                    <td>{{ servicio.titulo }}</td>
-                    <td style="height:150px;" >
-                            <img class="imagen" :src="getImagen(servicio.imagen)" alt="">
-                    </td>
-
+                <tr v-for="video in filteredVideos" :key="video.id">
+                    <td>{{ video.orden }}</td>
+                    <td>{{ video.titulo }}</td>
                     <td >
                         <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-sm" style="background-color: #7F7F7F; "
-                                @click="editarServicio(53, servicio.id)">
+                                @click="editarVideo(82, video.id)">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15"
                                     style="cursor: pointer">
                                     <path fill="white"
@@ -38,7 +33,7 @@
                                 </svg>
                             </button>
     
-                            <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px;  border:0px " @click="eliminarServicio(servicio.id)">
+                            <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px;  border:0px " @click="eliminarVideo(video.id)">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="15"
                                     style="cursor: pointer;">
                                     <path fill="white"
@@ -66,7 +61,7 @@ export default {
 
     data() {
         return {
-            servicios: [],
+            videos: [],
             search: ''
         }
     },
@@ -75,9 +70,9 @@ export default {
         idComponente() {
             return this.$store.getters['getMostrarComponente'];
         },
-        filteredServicios() {
-            return this.servicios.filter(servicio => {
-            return servicio.titulo.toLowerCase().includes(this.search.toLowerCase());
+        filteredVideos() {
+            return this.videos.filter(videos => {
+            return videos.titulo.toLowerCase().includes(this.search.toLowerCase());
     });
   }
     },
@@ -89,22 +84,22 @@ export default {
             }
         },
 
-        eliminarServicio(idServicio){
-        axios.post('/api/deleteServicio',{
-            idServicio: idServicio
+        eliminarVideo(idVideo){
+        axios.post('/api/deleteVideo',{
+            idVideo: idVideo
         })
                 .then(response => {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Servicio eliminado con éxito');  
-                    this.obtenerServicios();
+                    this.$store.commit('setMensajeAlerta', 'Video eliminado con éxito');  
+                    this.obtenerVideos();
                 })
                 .catch(error => {
                     console.error(error);
                 });
     },
-        crearServicio(){
-            this.$store.commit('mostrarComponente', 52);
+        crearVideo(){
+            this.$store.commit('mostrarComponente', 81);
         },
         getImagen(fileName) {
             if(fileName){
@@ -112,14 +107,15 @@ export default {
                 return '/api/getImage/' + filePath
             }
         },
-        editarServicio(idComponente, idServicio) {
-            this.$store.commit('setServicioId', idServicio);
+        editarVideo(idComponente, idVideo) {
+            this.$store.commit('setVideoId', idVideo);
             this.$store.commit('mostrarComponente', idComponente);
         },
-        obtenerServicios() {
-            axios.get('/api/obtenerServicios')
+        obtenerVideos() {
+            axios.get('/api/obtenerVideos')
                 .then(response => {
-                    this.servicios = response.data
+
+                    this.videos = response.data
                     
                 })
                 .catch(error => {
@@ -128,7 +124,7 @@ export default {
         }
     },
     mounted() {
-        this.obtenerServicios();
+        this.obtenerVideos();
     }
 }
 </script>

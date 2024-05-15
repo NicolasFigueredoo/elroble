@@ -4,7 +4,7 @@
       <div class="col-md-3 formulario">
         <form>
           <div class="mb-3 justify-content-center align-items-center">
-            <img class="imgKotex" src="../../../../img/kotex.jpg" alt="" />
+            <img class="imgKotex" src="../../../../img/logoelroble.png" alt="" />
           </div>
           <div class="mb-3">
             <label style="font-size: 14px" class="form-check-label"

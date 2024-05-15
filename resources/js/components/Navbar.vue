@@ -84,24 +84,36 @@
                 </router-link>
               </div>
               <div>
-                <p class="textoNavbar2">Servicios</p>
+                <router-link class="route" to="/servicios">
+                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/servicios') ? '700' : '500' }">Servicios</p>
+                </router-link>
               </div>
               <div>
-                <p class="textoNavbar2">Descargas</p>
+                <router-link class="route" to="/descargas">
+                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/descargas') ? '700' : '500' }">Descargas</p>
+                </router-link>
               </div>
               <div>
-                <p class="textoNavbar2">novedades</p>
+                <router-link class="route" to="/novedades">
+                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/novedades') ? '700' : '500' }">novedades</p>
+                </router-link>
               </div>
               <div>
-                <p class="textoNavbar2">ferias</p>
+                <router-link class="route" to="/ferias">
+                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/ferias') ? '700' : '500' }">ferias</p>
+                </router-link>
               </div>
               <div>
-                <p class="textoNavbar2">videos</p>
+                <router-link class="route" to="/videos">
+                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/videos') ? '700' : '500' }">videos</p>
+                </router-link>
               </div>
               <div>
-                <p class="textoNavbar2">contacto</p>
+                <router-link class="route" to="/contactos">
+                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/contacto') ? '700' : '500' }">contacto</p>
+                </router-link>
               </div>
-              <div>
+              <div><a target="_blank" :href="this.instagram">
                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 23 24" fill="none"
                   style="margin-bottom: 6px;">
                   <path
@@ -114,6 +126,7 @@
                     d="M19.1846 6.105C19.1846 6.36686 19.107 6.62285 18.9615 6.84058C18.816 7.05831 18.6092 7.22801 18.3673 7.32822C18.1254 7.42843 17.8592 7.45465 17.6023 7.40356C17.3455 7.35248 17.1096 7.22638 16.9244 7.04121C16.7393 6.85605 16.6131 6.62013 16.5621 6.3633C16.511 6.10647 16.5372 5.84026 16.6374 5.59833C16.7376 5.3564 16.9073 5.14962 17.125 5.00414C17.3428 4.85865 17.5988 4.78101 17.8606 4.78101C18.2118 4.78101 18.5486 4.92049 18.7969 5.16879C19.0452 5.41709 19.1846 5.75385 19.1846 6.105Z"
                     fill="white" />
                 </svg>
+              </a>
 
               </div>
 
@@ -261,6 +274,8 @@ export default {
   mounted() {
     this.obtenerLogo();
     this.obtenerContacto();
+    this.$store.commit('setNovedadId', null);
+
   }
 }
 </script>

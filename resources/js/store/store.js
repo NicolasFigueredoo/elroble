@@ -10,15 +10,23 @@ export default createStore({
     alertaClase: null,
     idSlider: null,
     idProducto: null,
-    idNovedad: null,
+    idNovedad:null,
     idValor: null,
     idServicio: null,
     selectedProductId: null,
+    descargaId: null,
+    videoId:null,
     inputValue: localStorage.getItem('inputValue') || false,
     summer: null,
 
   },
   mutations: {
+    setVideoId(state, videoId) {
+      state.videoId = videoId;
+  },
+    setDescargaId(state, descargaId) {
+      state.descargaId = descargaId;
+  },
     setServicioId(state, idServicio) {
       state.idServicio = idServicio;
   },
@@ -70,6 +78,12 @@ export default createStore({
   },
  
   getters: {
+    getIdVideo(state) {
+      return state.videoId;
+    },
+    getIdDescarga(state) {
+      return state.descargaId;
+    },
     getIdServicio(state) {
       return state.idServicio;
     },

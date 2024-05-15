@@ -201,26 +201,26 @@
                 </div>
             </div>
 
-            <div class="row" style="gap:60px; margin-top: 20px;">
-                <div class="card col-lg-3" style="width: 392px; height: 603px; border: none;"
+            <div class="row flex-wrap justify-content-between" style="margin-top: 20px;">
+                <div class="card col-lg-4" style="width: 392px; height: 603px; border: none;"
                     v-for="novedad in novedades" :key="novedad.id">
                         <div style="height: 392px;">
                             <img :src="getImagen(novedad.imagen)" class="card-img-top" alt="..."
                                 style="width: 100%; height: 100%; border-radius: 0%;">
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" @mouseover="changeIcono" @mouseout="changeIconoOut">
                             <h5 class="card-etiqueta">{{ novedad.etiqueta }}</h5>
                             <h5 class="card-title">{{ novedad.titulo }}</h5>
                             <p class="card-text" style="height: 40px;">{{ novedad.epigrafe }}</p>
-                            <div class="d-flex justify-content-between mt-5">
+                            <div id="footerI" class="d-flex justify-content-between mt-5">
                                 <div>
                                     <p class="card-link">Leer más</p>
                                 </div>
                                 <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
                                         fill="none">
-                                        <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z"
-                                            fill="#414047" />
+                                        <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" 
+                                            :fill="iconoColorN" />
                                     </svg>
                                 </div>
     
@@ -257,7 +257,8 @@ export default defineComponent({
             novedades: [],
             imagenBanner: '',
             showIcons: {},
-            iconoColor: 'white'
+            iconoColor: 'white',
+            iconoColorN: '#414047'
 
 
         };
@@ -265,6 +266,15 @@ export default defineComponent({
     },
 
     methods: {
+
+        changeIconoOut(){
+            this.iconoColorN = '#414047'
+
+        },
+        changeIcono(){
+            this.iconoColorN = '#E3202B'
+
+        },
         changeIcon2(){
             this.iconoColor = 'white'
         },
@@ -363,6 +373,21 @@ export default defineComponent({
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+
+
+.card-body:hover{
+    background: #FAFAF9;
+    border-radius: 0%;
+}
+
+.card-body:hover .card-link{
+    color: black;
+}
+
+
+.card-body:hover .card-link{
+    color: black;
+}
 .BverProductos {
     padding: 11px 25px;
     justify-content: center;
@@ -492,6 +517,12 @@ export default defineComponent({
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.masInformacion2:hover{
+    background: var(--Rojo, white);
+    color: #E3202B;
+    border: 1px solid #E3202B
 }
 
 .infoEmpresa {

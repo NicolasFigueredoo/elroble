@@ -56,7 +56,7 @@
                         <label class="form-label">Orden</label>
                         <input type="text" class="form-control" id="orden">
                     </div>
-                    <div class="mt-3">
+                    <div>
                         <label class="form-label">Imagen 454x448</label>
                         <input @change="guardarImagen()" type="file" ref="imagenProducto" class="form-control" id="imagen">
 
@@ -93,13 +93,13 @@ export default {
 
     computed: {
         idProducto() {
-            return this.$store.getters['getIdProducto'];
+            return this.$store.getters['getIdNovedad'];
         },
     },
     methods: {
 
         eliminarImagen(id){
-            axios.post('/api/eliminarImagen', {
+            axios.post('/api/eliminarImagenFeria', {
                 idImagen: id,
             }
             )
@@ -120,8 +120,9 @@ export default {
         },
 
         cargarImagen() {
-            axios.post('/api/guardarImagenProducto', {
-                idProducto: this.idProducto,
+            console.log(this.idProducto)
+            axios.post('/api/guardarImagenFeria', {
+                idFeria: this.idProducto,
                 imagen: this.imagenProducto,
                 orden: $('#orden').val()
             },
@@ -153,10 +154,10 @@ export default {
             }
         },
         obtenerProducto() {
-            axios.get(`/api/obtenerProducto/${this.idProducto}`)
+            axios.get(`/api/obtenerFeria/${this.idProducto}`)
                 .then(response => {
                     this.producto = response.data
-                    this.nombre = response.data.nombre
+                    this.nombre = response.data.titulo
                     this.imagenes = response.data.imagenes
                 })
                 .catch(error => {
