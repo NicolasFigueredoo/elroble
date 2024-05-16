@@ -61,6 +61,10 @@ export default {
     },
 
     methods: {
+        resetCampos(){
+            $('#orden').val('');
+            $('#titulo').val('');
+        },
         guardarFoto() {
             const file = this.$refs.fotoSlider;
             this.foto = file.files[0]
@@ -79,6 +83,8 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Valor creado con éxito');
                     this.$store.commit('mostrarComponente', 32);
+                    this.resetCampos()
+                    $('#editor').summernote('code', '');
 
                 })
                 .catch(error => {
@@ -88,7 +94,7 @@ export default {
 
         },
         summerNote() {
-
+            if (this.getSummer === null && this.getSummer !== true) {
                 $('#editor').summernote({
                     height: 300,
                 });
@@ -98,6 +104,7 @@ export default {
                 });
 
                 this.$store.commit('setSummer', true);
+            }
             
 
 
@@ -117,7 +124,7 @@ export default {
 
 <style scoped>
 .encabezado {
-    background-color: rgb(52, 68, 127);
+    background-color: #7F7F7F;
     color: white;
 }
 

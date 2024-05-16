@@ -7,8 +7,8 @@
 </head>
 <body>
     <p>¡Hola!</p>
-    <p>Has recibido un nuevo mensaje de contacto de {{ $nombre }} {{ $apellido }}</p>
-    <p> <strong>Email: </strong>{{ $email }} <strong>Celular: </strong>{{ $celular }}</p>
+    <p>Has recibido un nuevo mensaje de contacto de {{ $nombre }}</p>
+    <p> <strong>Email: </strong>{{ $email }} <strong>Celular: </strong>{{ $celular }} <strong>Empresa: </strong>{{ $empresa }}</p> 
     <p> <strong>Mensaje: </strong> {{ $mensaje }}</p>
 </body>
 

@@ -25,6 +25,7 @@
                 <div class="contenedor-imagen" style="width: 454px; height: 448px;">
                     <div ref="imgenPrincipal" @click="mostrarImagenProducto()" v-if="this.producto" :style="{
                         backgroundImage: `url(${getImagen(imagenes[imagenSeleccionada].path)})`,
+                        backgroundSize: 'contain',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                         border: '1px solid #E5E5E5',
@@ -174,6 +175,7 @@ export default {
     },
     mounted() {
         this.obtenerInformacionProducto();
+        this.$store.commit('setSelectedProductId', null);
 
     }
 }

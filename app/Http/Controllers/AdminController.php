@@ -19,6 +19,7 @@ use App\Models\Slider;
 use App\Models\Suscripcion;
 use App\Models\Valores;
 use App\Models\Video;
+use App\Models\ZonaPrivada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
@@ -165,8 +166,8 @@ class AdminController extends Controller
         $banner = Banner::find($request->idBanner);
         $banner->titulo = $request->bannerTitulo;
         $banner->texto = $request->bannerTexto;
-        $banner->link = $request->linkBoton;
         $banner->textoboton = $request->txtBoton;
+        $banner->link = $request->linkBoton;
 
         if ($request->hasFile('foto')) {
 
@@ -433,8 +434,6 @@ class AdminController extends Controller
         }
     }
     
-    
-    
     public function obtenerDescargas()
     {
         $descargas = Descarga::orderBy('orden', 'asc')->get();
@@ -630,4 +629,142 @@ class AdminController extends Controller
         $video->delete();
         return response()->json($video);
     }
+
+     //METADATOS
+
+     public function obtenerMetadatos(){
+        $metadatos = MetaDatos::all();
+        return response()->json($metadatos);
+
+    }
+
+    public function obtenerMetadato($idMetadato){
+        $metadato = MetaDatos::find($idMetadato);
+        return response()->json($metadato);
+    }
+
+    public function updateMetadato(Request $request){
+        $metadatos = MetaDatos::all();
+        foreach ($metadatos as $meta) {
+            $metadato = MetaDatos::find($meta['id']);
+            $metadato->claves = $request->claves;
+            $metadato->save();
+        }
+
+        return response()->json($metadatos);
+    }
+
+    //ZONA PRIVADA
+    public function obtenerFileZonas()
+    {
+        $descargas = ZonaPrivada::orderBy('orden', 'asc')->get();
+        return response()->json($descargas);
+    }
+
+    public function obtenerFileZona($idFileZona)
+    {
+        $descarga = ZonaPrivada::find($idFileZona);
+        return response()->json($descarga);
+    }
+
+    public function crearFileZona(Request $request)
+    {
+        $descarga = new ZonaPrivada();
+        $descarga->orden = $request->orden;
+        $descarga->numeropedido = $request->Npedido;
+
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $formato = $file->getClientOriginalExtension();
+            $pesoEnBytes = $file->getSize();
+            $pesoEnKb = $pesoEnBytes / 1024;
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('file')->store('fotos');
+            $descarga->file = $photoPath;
+            $descarga->formato = $formato;
+            $descarga->peso = $pesoEnKb;
+
+        }
+
+        $descarga->save();
+
+        return response()->json($descarga);
+    }
+
+    public function updateFileZona(Request $request)
+    {
+        $descarga = ZonaPrivada::find($request->idFileZona);
+        $descarga->orden = $request->orden;
+        $descarga->numeropedido = $request->Npedido;
+
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $formato = $file->getClientOriginalExtension();
+            $pesoEnBytes = $file->getSize();
+            $pesoEnKb = $pesoEnBytes / 1024;
+
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+
+            $photoPath = $request->file('file')->store('fotos');
+            $descarga->file = $photoPath;
+            $descarga->formato = $formato;
+            $descarga->peso = $pesoEnKb;
+
+        }
+
+        $descarga->save();
+
+        return response()->json($descarga);
+    }
+
+    public function deleteFileZona(Request $request)
+    {
+        $descarga = ZonaPrivada::find($request->idFileZona);
+        $descarga->delete();
+        return response()->json($descarga);
+    }
+
+    public function descargarArchiveZona($idArchivo)
+    {
+        $archivo = ZonaPrivada::find($idArchivo);
+        
+        if (!$archivo) {
+            return response()->json(['error' => 'Archivo no encontrado'], 404);
+        }
+    
+        $rutaArchivo = $archivo->file;
+        $tipoMime = Storage::mimeType($rutaArchivo);
+    
+        if (Storage::exists($rutaArchivo)) {
+            return response()->file(storage_path('app/' . $rutaArchivo), ['Content-Type' => $tipoMime]);
+        } else {
+            return response()->json(['error' => 'El archivo no existe'], 404);
+        }
+    }
+
+    public function obtenerZona($idZona){
+        $catalogo = ZonaPrivada::find($idZona);
+        $rutaArchivo = $catalogo->file;
+        
+        if (Storage::exists($rutaArchivo)) {
+            $tipoMime = Storage::mimeType($rutaArchivo);
+
+            return response()->file(storage_path('app/' . $rutaArchivo), ['Content-Type' => $tipoMime]);
+        } else {
+            return response()->json(['error' => 'El archivo no existe'], 404);
+        }
+        
+    }
+
+    
 }
+
+

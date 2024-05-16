@@ -46,8 +46,8 @@
                 </div>
 
                </div>
-               <div >
-                   <div class="d-flex flex-column d-flex flex-column">
+               <div style="width: 78%;">
+                   <div class="d-flex flex-column">
                        <div style="margin-top: 30px">
                            <p class="titleN">{{ this.titulo }}</p>
                        </div>
@@ -59,8 +59,9 @@
        
                            </div>
                        </div>
-                       <div>
-                           <button type="button" class="btn botonVolver">Volver</button>
+                       <div class="mt-4">
+                            <button @click="volverFeria" type="button" class="btn botonVolver">Volver</button>
+
                        </div>
                    </div>
 
@@ -100,6 +101,11 @@ export default {
         }
     },
     methods: {
+
+        volverFeria(){
+            this.$store.commit('setNovedadId', null);
+            location.reload();
+        },
         getImagen(fileName) {
             if (fileName) {
                 const filePath = fileName.split('/').pop();

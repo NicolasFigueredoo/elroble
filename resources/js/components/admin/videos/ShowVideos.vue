@@ -156,7 +156,7 @@ h1 {
     height: 100%;
 }
 
-#crearNovedad{
+#crearVideo{
     font-size: 16px;
     color: black;
     font-family: "Montserrat", sans-serif;

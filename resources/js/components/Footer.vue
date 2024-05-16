@@ -57,17 +57,17 @@
                     <div class="col-lg-1 textoEmpresa" style="height: 196px; width: 140px;">
                         <p id="tituloSecciones">Secciones</p>
                         <p @click="this.$router.push('/productos');">Productos</p>
-                        <p @click="this.$router.push('/productosdelinea');">Quienes somos</p>
+                        <p @click="this.$router.push('/empresa');">Quienes somos</p>
 
                     </div>
                     <div class="col-lg-1 textoEmpresa2" >
                         <p @click="this.$router.push('/novedades');">Novedades</p>
-                        <p @click="this.$router.push('/contacto');">Contacto</p>
+                        <p @click="this.$router.push('/contactos');">Contacto</p>
 
                     </div>
                     <div class="col-lg-3 d-flex flex-column textoEmpresa3" >
                         <div>
-                            <p class="sub">Suscribite al Newsletter</p>
+                            <p id="sub">Suscribite al Newsletter</p>
                         </div>
                         <div class="d-flex">
                             <input v-model="emailSuscripcion" type="email"
@@ -105,7 +105,10 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </div>
-                            <p class="textoF">{{ direccion }}</p>
+                            <a href="https://maps.app.goo.gl/1TA9NhHJafkaiDvGA" target="_blank" style="text-decoration: none; color: black;">
+                                <p class="textoF">{{ direccion }}</p>
+                            
+                            </a>
                         </div>
                         <div class="d-flex" style="cursor: pointer;">
                             <div style="width: 20px;">
@@ -181,7 +184,7 @@
         <div style="background: var(--Rojo, #E3202B);">
             <div class="container d-flex textoEmpresa5"
                 style="padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.3);">
-                <p>© Copyright 2024 kotex S.R.L. Todos los derechos reservados</p>
+                <p>© Copyright 2024 El Roble S.R.L. Todos los derechos reservados</p>
                 <a class="osole" href="https://osole.com.ar/">
                     <p>By osole</p>
                 </a>
@@ -413,7 +416,7 @@ input {
     cursor: pointer;
 }
 
-.sub {
+#sub {
     color: #FFF;
     font-family: Inter;
     font-size: 18px;

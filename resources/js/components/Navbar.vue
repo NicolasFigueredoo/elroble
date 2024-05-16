@@ -153,15 +153,17 @@
           </div>
           <div class="modal-body">
             <form action="">
+              <div class="mensajeCrear">
+              </div>
               <div>
                 <label class="form-label textZona">Usuario</label>
-                <input type="text" class="form-control" id="Usuario" placeholder="Usuario">
+                <input type="text" class="form-control" id="Usuario" placeholder="Usuario" v-model="usuario">
 
               </div>
 
               <div class="mt-3">
                 <label class="form-label textZona">Contraseña</label>
-                <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña">
+                <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" v-model="contraseña">
 
               </div>
 
@@ -171,10 +173,52 @@
             </form>
             <div class="d-flex flex-column mt-4">
               <div>
-                <button type="button" id="botonLogin" class="btn btn-secondary" data-bs-dismiss="modal">Ingresar</button>
+                <button type="button" id="botonLogin" class="btn btn-secondary" data-bs-dismiss="modal" @click="ingresarZona()">Ingresar</button>
               </div>
               <div class="mt-3">
-                <button type="button" id="botonRegistrar" class="btn btn-primary">Crear cuenta</button>
+                <button type="button" id="botonRegistrar" class="btn btn-primary" @click="crearAccountModal()">Crear cuenta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="miModalAccount" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
+        <div class="modal-content" style="border-radius: 0%;">
+          <div class="modal-header">
+            <h5 class="modal-title">Zona privada</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="">
+          
+              <div>
+                <label class="form-label textZona">Usuario</label>
+                <input type="text" class="form-control" id="name" placeholder="Usuario">
+
+              </div>
+
+              <div class="mt-3">
+                <label class="form-label textZona">Email</label>
+                <input type="text" class="form-control" id="mail" placeholder="Email">
+
+              </div>
+
+              <div class="mt-3">
+                <label class="form-label textZona">Contraseña</label>
+                <input type="password" class="form-control" id="pass" placeholder="Contraseña">
+
+              </div>
+
+              <div>
+
+              </div>
+            </form>
+            <div class="d-flex flex-column mt-4">
+              <div class="mt-3">
+                <button type="button" id="botonRegistrar" class="btn btn-primary" @click="crearAccount()">Crear cuenta</button>
               </div>
             </div>
           </div>
@@ -208,12 +252,68 @@ export default {
       instagram: null,
       telefonoSecundario: null,
       whatsappLink: null,
+      usuario: null,
+      contraseña: null
 
 
     }
   },
   methods: {
 
+    ingresarZona() {
+      if (this.usuario && this.contraseña) {
+        axios
+          .post("/api/verificarLoginZona", {
+            nombre: this.usuario,
+            contraseña: this.contraseña,
+          })
+          .then((response) => {
+
+            if (typeof response.data === "number") {  
+              this.$store.commit("setLoginId", response.data);
+              this.$router.push("/zonaPrivada");
+            } else {
+              $(".mensajeCrear").html(
+                `<p class="text-danger ">${response.data}</p>`
+              );
+            }
+          })
+          .catch((error) => {
+            $(".mensajeCrear").html(`<p class="text-danger ">${response.data}</p>`);
+            console.error("Error ingresar Zona:", error);
+          });
+      } else {
+        $(".mensajeCrear").html(
+          `<p class="text-danger ">Faltan rellenar campos</p>`
+        );
+      }
+     },
+    crearAccount(){
+      axios.post('/api/crearUsuarioZona', {
+                usuario: $('#name').val(),
+                email: $('#mail').val(),
+                contraseña: $('#pass').val(),
+            })
+                .then(response => {
+
+                  $('#miModalAccount').modal('hide');
+                  $('.mensajeCrear').html('<p class="text-success"> Usuario creado con éxito </p>')
+
+                  
+   
+                })
+                .catch(error => {
+                    console.error('Error ingresar Admin:', error);
+                });
+
+    },
+    crearAccountModal(){
+
+      $('#miModalAccount').modal('show');
+      $('.mensajeCrear').html('')
+
+
+    },
     abrirModal() {
       $('#miModal').modal('show');
     },
@@ -261,12 +361,7 @@ export default {
           console.error('Error al traer los contactos:', error);
         });
     },
-    verProducto(idProducto) {
-      this.$store.commit('setSelectedProductId', idProducto);
-      this.$router.push('/productosdelinea');
-      $('#exampleModal').modal('hide');
-
-    },
+    
     isRouteActive(route) {
       return this.$route.path === route;
     }

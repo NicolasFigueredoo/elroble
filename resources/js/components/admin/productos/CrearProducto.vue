@@ -139,9 +139,6 @@ export default {
             $('#nombre').val('')
             $('#destacado').prop('checked', false)
             $('#orden').val('')
-            
-
-
         },
         deleteSubProducto(id){
             this.subProductos = this.subProductos.filter(subProducto => subProducto.idSubProducto !== id);
@@ -201,11 +198,13 @@ export default {
 
             )
                 .then(response => {
-                    console.log(response)
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Producto creado con éxito');
                     this.$store.commit('mostrarComponente', 25);
+                    $('#editor').summernote('code', '');
+                    this.resetCampos();
+
 
                 })
                 .catch(error => {

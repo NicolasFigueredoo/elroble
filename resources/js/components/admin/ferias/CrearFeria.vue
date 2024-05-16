@@ -11,23 +11,15 @@
                     <label class="form-label">Orden</label>
                 <input type="text" class="form-control" id="orden">
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-8">
                     <label class="form-label">Título</label>
                 <input type="text" class="form-control" id="titulo">
                 </div>
-                <div class="col-lg-1 d-flex flex-column align-items-center">
-                    <label class="form-check-label" for="checkbox3">Destacado</label>
-                    <input type="checkbox" class="form-check-input" id="destacado">
-                </div>
             </div>
             <div class="row mt-3">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <label class="form-label">Epígrafe</label>
                 <input type="text" class="form-control" id="epigrafe">
-                </div>
-                <div class="col-lg-6">
-                    <label class="form-label">Etiqueta</label>
-                <input type="text" class="form-control" id="etiqueta">
                 </div>
             </div>
             <div class="mb-3 mt-3">
@@ -78,26 +70,20 @@ export default {
             $('#titulo').val('');
             $('#epigrafe').val('');
             $('#etiqueta').val('');
-            $('#imgs').val('');
         },
         guardarFoto() {
             const file = this.$refs.fotoSlider;
             this.foto = file.files[0]
         },
         crearNovedad() {
-            let destacado = $('#destacado').prop("checked");
-            let destacadoEnviar = 0;
-            if(destacado == true){
-                destacadoEnviar = 1;
-            }
             let formData = new FormData();
             formData.append('foto', this.foto);
             formData.append('texto', $('#editor').summernote('code').toString());
             formData.append('orden', $('#orden').val());
             formData.append('titulo', $('#titulo').val());
             formData.append('epigrafe', $('#epigrafe').val());
-            formData.append('etiqueta', $('#etiqueta').val());
-            formData.append('destacado',destacadoEnviar);
+            formData.append('etiqueta', '');
+            formData.append('destacado', 0);
 
             axios.post('/api/crearFeria', formData, {
                 headers: {
@@ -110,6 +96,8 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Feria creada con éxito');
                     this.$store.commit('mostrarComponente', 70);
+                    $('#editor').summernote('code', '');
+                    this.resetCampos();
 
                 })
                 .catch(error => {

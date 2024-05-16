@@ -160,7 +160,7 @@ h1 {
     height: 100%;
 }
 
-#crearNovedad{
+#crearServicio{
     font-size: 16px;
     color: black;
     font-family: "Montserrat", sans-serif;

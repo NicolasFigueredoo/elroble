@@ -4,8 +4,7 @@
         <div class="container" style="margin-top: 23px;">
             <p class="migaPan">Inicio <span class="negrita">> Servicios</span></p>
 
-    <div v-for="(servicio, index) in servicios" :key="servicio.id" class="row" style="margin-bottom: 89px; margin-top: 41px;">
-        <!-- Si el índice es par, imagen a la izquierda -->
+    <div v-for="(servicio, index) in servicios" :key="servicio.id" class="row" style="margin-bottom: 89px; margin-top: 30px;">
         <div v-if="index % 2 === 0" class="col-lg-12">
             <div class="d-flex justify-content-between service">
                 <div class="serviceImg">
@@ -27,7 +26,6 @@
                 </div>
             </div>
         </div>
-        <!-- Si el índice es impar, imagen a la derecha -->
         <div v-else class="col-lg-12">
             <div class="d-flex justify-content-between service">
                 <div class="col-lg-5 d-flex flex-column ">
@@ -48,6 +46,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 

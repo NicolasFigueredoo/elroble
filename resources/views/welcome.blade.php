@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>El roble</title>
+        <title>El Roble</title>
+        <link rel="icon" href="{{ asset('img/LogoRobl.png') }}">
 
         @vite('resources/css/app.css')
         <!-- Fonts -->
@@ -23,5 +24,6 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeJzdQpAAAAAI3K6I4CjWYz0c0dRO3K3GOfqBpc"></script>
 
 </html>

@@ -3,7 +3,8 @@
         <div class="container" style="margin-top: 23px;">
             <p class="migaPan">Inicio <span class="negrita">> Novedades</span></p>
 
-            <div class="d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 110px; margin-top: 15px;">
+            <div class="d-flex flex-column justify-content-center align-items-center"
+                style="margin-bottom: 110px; margin-top: 15px;">
                 <div class="imgNovedadP">
                     <div :style="{
                         backgroundImage: `url(${getImagen(this.imagen)})`,
@@ -15,7 +16,7 @@
                     }">
                     </div>
                 </div>
-                
+
                 <div class="d-flex flex-column infoNovedadP">
 
                     <div style="margin-top: 30px">
@@ -26,11 +27,14 @@
                     </div>
                     <div>
                         <div class="textoN" v-html="this.texto">
-    
+
                         </div>
                     </div>
-                    <div>
-                        <button type="button" class="btn botonVolver">Volver</button>
+                    <div class="mt-4"> 
+                            <button @click="volverNovedad" type="button" class="btn botonVolver">Volver</button>
+
+
+
                     </div>
                 </div>
             </div>
@@ -63,6 +67,10 @@ export default {
         }
     },
     methods: {
+        volverNovedad(){
+            this.$store.commit('setNovedadId', null);
+            location.reload();
+        },
         getImagen(fileName) {
             if (fileName) {
                 const filePath = fileName.split('/').pop();
@@ -96,35 +104,37 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-.imgNovedadP{
+.imgNovedadP {
     width: 809px;
-     height: 572px;
+    height: 572px;
 }
 
-.infoNovedadP{
+.infoNovedadP {
     width: 809px;
 }
-.botonVolver{
+
+.botonVolver {
     display: inline-flex;
-padding: 11px 25px;
-justify-content: center;
-align-items: center;
-gap: 20px;
-background: var(--Rojo, #E3202B);
-color: #FFF;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-border-radius: 0%;
+    padding: 11px 25px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: var(--Rojo, #E3202B);
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 0%;
 }
 
-.botonVolver:hover{
+.botonVolver:hover {
     background: var(--Rojo, #FFF);
-color: #E3202B; 
-border: 1px solid #E3202B;
+    color: #E3202B;
+    border: 1px solid #E3202B;
 }
+
 .textoN {
     color: var(--tipografia, #1E1E1E);
     font-family: Inter;
@@ -174,11 +184,11 @@ border: 1px solid #E3202B;
 }
 
 @media screen and (max-width: 1000px) {
-    .imgNovedadP{
+    .imgNovedadP {
         width: 100%;
     }
 
-    .infoNovedadP{
+    .infoNovedadP {
         width: 100%;
     }
 }

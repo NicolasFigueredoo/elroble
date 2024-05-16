@@ -1,5 +1,6 @@
 <template>
     <div class="productos-view">
+
         <Productos v-if="!idProducto" @ver-producto="mostrarProducto" />
         <InformacionProducto v-else :id-producto="idProducto"  />
 
@@ -28,14 +29,16 @@
       this.idProducto = idProducto;
       this.$store.commit('setSelectedProductId', idProducto);
     },
-    created() {
-    const selectedProductId = this.$store.getters['getSelectedProductId'];
-    if (selectedProductId !== null) {
-      this.idProducto = selectedProductId;
-    }
-    
-  }
   },
+  created() {
+    
+  const selectedProductId = this.$store.getters['getSelectedProductId'];
+
+  if (selectedProductId !== null) {
+    this.idProducto = selectedProductId;
+  }
+  
+}
    
    
   };

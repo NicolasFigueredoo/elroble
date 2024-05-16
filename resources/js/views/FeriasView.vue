@@ -27,14 +27,8 @@
       this.idNovedad = idNovedad;
       this.$store.commit('setNovedadId', idNovedad);
     },
-    created() {
-    const selectedNovedadId = this.$store.getters['getIdNovedad'];
-    if (selectedNovedadId !== null) {
-      this.idNovedad = selectedNovedadId;
-    }
-    
-  }
   },
+ 
    
    
   };

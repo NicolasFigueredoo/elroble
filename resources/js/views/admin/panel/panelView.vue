@@ -180,6 +180,19 @@
                             </a>
                       
                         </li>
+
+                        <li class="sidebar-item">
+                            <a @click="mostrarComponenteF(108)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseMetadatos"
+                                aria-expanded="false" aria-controls="collapseMetadatos">
+                                <div class="nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 640 512">
+                                        <path fill="#ffffff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 65.1c-37.8 5.4-69.4 29.6-85.2 62.9L360 224l0 64 56 0 0 8.6c-19.1 11.1-32 31.7-32 55.4l-24 0 0 64 24 0 0 64L64 480c-35.3 0-64-28.7-64-64L0 96zM64 224l0 64 88 0 0-64-88 0zm232 0l-88 0 0 64 88 0 0-64zM152 352l-88 0 0 64 88 0 0-64zm56 0l0 64 88 0 0-64-88 0zM528 240c-17.7 0-32 14.3-32 32l0 48 64 0 0-48c0-17.7-14.3-32-32-32zm-80 32c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c17.7 0 32 14.3 32 32l0 128c0 17.7-14.3 32-32 32l-160 0c-17.7 0-32-14.3-32-32l0-128c0-17.7 14.3-32 32-32l0-48z"/></svg>
+                                </div>
+                                <span>Zona Privada</span>
+                             
+                            </a>
+                        
+                        </li>
     
                         <li class="sidebar-item">
                             <a @click="mostrarComponenteF(19)" class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLogos"
@@ -214,12 +227,32 @@
                             </a>
                             <div id="collapseUsuario" class="collapse">
                                 <nav  class="sidenav-menu-nested nav accordion">
-                                    <a @click="mostrarComponenteF(14)" class="nav-link">Mostrar</a>
+                                    <a @click="mostrarComponenteF(99)" class="nav-link">Mostrar</a>
                                 </nav>
                             </div>
-                            <div v-if="this.rol == 'administrador'" id="collapseUsuario" class="collapse">
+                            <div v-if="this.admin == 1" id="collapseUsuario" class="collapse">
                                 <nav class="sidenav-menu-nested nav accordion">
-                                    <a @click="mostrarComponenteF(15)" class="nav-link ">Crear</a>
+                                    <a @click="mostrarComponenteF(100)" class="nav-link ">Crear</a>
+                                </nav>
+                            </div>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseClientes"
+                                aria-expanded="false" aria-controls="collapseClientes">
+                                <div class="nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                        <path fill="#ffffff" d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/></svg>
+                                </div>
+                                <span>Clientes</span>
+                                <div class="sidenav-collapse-arrow">
+                                        <svg class="fa-solid fa-angle-down" xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                                            <path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                                </div>
+                            </a>
+                            <div id="collapseClientes" class="collapse">
+                                <nav  class="sidenav-menu-nested nav accordion">
+                                    <a @click="mostrarComponenteF(105)" class="nav-link">Mostrar</a>
                                 </nav>
                             </div>
                         </li>
@@ -248,7 +281,7 @@
                             </div>
                         </li>
                         <li class="sidebar-item">
-                            <a @click="mostrarComponenteF(27)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseMetadatos"
+                            <a @click="mostrarComponenteF(90)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseMetadatos"
                                 aria-expanded="false" aria-controls="collapseMetadatos">
                                 <div class="nav-link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 640 512">
@@ -355,6 +388,24 @@
                 <ShowSeccionesNosotros v-if="mostrarComponente === 32"/>
                 <EditSeccionesNosotros v-if="mostrarComponente === 33"/>
 
+                <!--COMPONENTES METADATOS -->
+                <MetaDatos v-if="mostrarComponente === 90"/>
+                <EditMetadatos v-if="mostrarComponente === 91"/>
+
+                 <!--COMPONENTES USUARIOS -->
+                 <ShowUsuarios v-if="mostrarComponente === 99"/>
+                 <CrearUsuario v-if="mostrarComponente === 100"/>
+                 <EditUsuario v-if="mostrarComponente === 101"/>
+
+                <!--COMPONENTES CLIENTES -->
+                <ShowClientes v-if="mostrarComponente === 105"/>
+
+                <!--COMPONENTES ZONA PRIVADA -->
+                <CrearFileZona v-if="mostrarComponente === 110"/>
+                <EditarFileZona v-if="mostrarComponente === 109"/>
+                <ShowFilesZona v-if="mostrarComponente === 108"/>
+
+
             </div>
 
 
@@ -415,6 +466,19 @@ import ShowSeccionesNosotros from "@/components/admin/empresa/ShowSeccionesNosot
 import EditSeccionesNosotros from "@/components/admin/empresa/EditSeccionesNosotros.vue";
 import CrearSeccion from "@/components/admin/empresa/CrearSeccion.vue";
 
+import MetaDatos from "@/components/admin/metadatos/MetaDatos.vue";
+import EditMetadatos from "@/components/admin/metadatos/EditMetadatos.vue";
+
+import ShowUsuarios from "@/components/admin/usuario/ShowUsuarios.vue";
+import CrearUsuario from "@/components/admin/usuario/CrearUsuario.vue";
+import EditUsuario from "@/components/admin/usuario/EditUsuario.vue";
+
+import ShowClientes from "@/components/admin/clientes/ShowClientes.vue";
+
+import CrearFileZona from "@/components/admin/zonaPrivada/CrearFileZona.vue";
+import EditarFileZona from "@/components/admin/zonaPrivada/EditarFileZona.vue";
+import ShowFilesZona from "@/components/admin/zonaPrivada/ShowFilesZona.vue";
+
 import axios from "axios";
 
 export default {
@@ -450,13 +514,23 @@ export default {
         ProductosImagenesFeria,
         ShowVideos,
         CrearVideo,
-        EditarVideo
+        EditarVideo,
+        MetaDatos,
+        EditMetadatos,
+        ShowUsuarios,
+        CrearUsuario,
+        EditUsuario,
+        ShowClientes,
+        CrearFileZona,
+        EditarFileZona,
+        ShowFilesZona
 
 
   
     },
     data(){
         return{
+            admin: 0
         }
     },
     computed:{
@@ -480,7 +554,7 @@ export default {
         obtenerUsuario(){
             axios.get(`/api/obtenerIdUsuario/${this.getIdLogin}`)
                 .then(response => {
-                    this.rol = response.data.rol
+                    this.admin = response.data.admin
                     this.nombre = response.data.usuario
                 })
                 .catch(error => {

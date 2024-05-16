@@ -10,6 +10,8 @@
         <div class="input-group mb-3 mt-2">
             <input type="text" class="form-control" placeholder="Buscar..." v-model="search" style="border-radius: 0%;">
         </div>
+        <div class="table-responsive">
+
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -58,6 +60,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
 
     </div>
 

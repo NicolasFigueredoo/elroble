@@ -145,4 +145,11 @@ h1{
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
 }
+
+#crearServicio{
+    font-size: 16px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
 </style>

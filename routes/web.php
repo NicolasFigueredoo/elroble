@@ -23,7 +23,10 @@ Route::get('/api/getImage/{fileName}', [ImagenController::class, 'getImage']);
 
 //LOGIN
 Route::post('/api/verificarLogin', [UserController::class, 'verify']);
+Route::post('/api/verificarLoginZona', [UserController::class, 'verificarLoginZona']);
+ 
 Route::get('/api/obtenerIdUsuario/{idUsuario}', [UserController::class, 'obtenerUsuario']);
+Route::get('/api/obtenerIdUsuarioZona/{idUsuario}', [UserController::class, 'obtenerIdUsuarioZona']);
 
 //SLIDER
 Route::get('/api/obtenerSliders', [AdminController::class, 'obtenerSliders']);
@@ -110,3 +113,35 @@ Route::post('/api/crearVideo', [AdminController::class, 'crearVideo']);
 
 //descargas
 Route::get('/api/descargarArchive/{idDescarga}', [AdminController::class, 'descargarArchive']);
+Route::get('/api/descargarArchiveZona/{idDescarga}', [AdminController::class, 'descargarArchiveZona']);
+Route::get('/api/obtenerZona/{idZona}', [AdminController::class, 'obtenerZona']);
+
+//EMAILS
+Route::post('/enviarCorreo', [EmailsController::class, 'enviarCorreoContacto']);
+
+//METADATOS
+Route::get('/api/obtenerMetadatos', [AdminController::class, 'obtenerMetadatos']);
+Route::get('/api/obtenerMetadato/{idMetadato}', [AdminController::class, 'obtenerMetadato']);
+Route::post('/api/updateMetadato/', [AdminController::class, 'updateMetadato']);
+
+
+//usuarios
+Route::get('/api/obtenerUsuarios', [UserController::class, 'obtenerUsuarios']);
+Route::get('/api/obtenerIdUsuario/{idUsuario}', [UserController::class, 'obtenerUsuario']);
+Route::post('/api/updateUsuario', [UserController::class, 'update']);
+Route::get('/api/deleteUsuario/{idUsuario}', [UserController::class, 'destroy']);
+Route::post('/api/crearUsuario', [UserController::class, 'store']);
+
+//clientes
+Route::get('/api/obtenerClientes', [UserController::class, 'obtenerClientes']);
+
+//ZONA PRIVADA
+Route::get('/api/obtenerFileZonas', [AdminController::class, 'obtenerFileZonas']);
+Route::post('/api/deleteFileZona', [AdminController::class, 'deleteFileZona']);
+Route::post('/api/crearFileZona', [AdminController::class, 'crearFileZona']);
+Route::post('/api/updateFileZona', [AdminController::class, 'updateFileZona']);
+Route::get('/api/obtenerFileZona/{idFileZona}', [AdminController::class, 'obtenerFileZona']);
+Route::get('/api/deleteUsuarioZona/{idUsuario}', [UserController::class, 'deleteUsuarioZona']);
+
+//ZONA PRIVADA
+Route::post('/api/crearUsuarioZona', [UserController::class, 'crearUsuarioZona']);

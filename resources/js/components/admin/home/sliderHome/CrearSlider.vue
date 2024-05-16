@@ -94,6 +94,9 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Slider creado con éxito');
                     this.$store.commit('mostrarComponente', 1);
+                    this.resetCampos();
+                    $('#editor').summernote('code', '');
+
 
                 })
                 .catch(error => {
@@ -106,9 +109,6 @@ export default {
 
         },
         summerNote() {
-
-            
-
             if (this.getSummer === null && this.getSummer !== true) {
                 $('#editor').summernote({
                     height: 300,
@@ -129,10 +129,9 @@ export default {
     mounted() {
 
         this.summerNote();
-        this.resetCampos();
 
 
-    }
+    } 
 
 }
 </script>

@@ -11,7 +11,7 @@ class ContactoMail extends Mailable
     use Queueable, SerializesModels;
 
     public $nombre;
-    public $apellido;
+    public $empresa;
     public $email;
     public $celular;
     public $mensaje;
@@ -20,10 +20,10 @@ class ContactoMail extends Mailable
      *
      * @return void
      */
-    public function __construct($nombre, $apellido, $email,$celular,$mensaje )
+    public function __construct($nombre, $empresa, $email,$celular,$mensaje )
     {
         $this->nombre = $nombre;
-        $this->apellido = $apellido;
+        $this->empresa = $empresa;
         $this->email = $email;
         $this->celular = $celular;
         $this->mensaje = $mensaje;

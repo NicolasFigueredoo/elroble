@@ -91,14 +91,17 @@ export default {
 
         },
         summerNote() {
-            $('#editor').summernote({
-                height: 300,
-            });
-            $('.summernote').summernote();
-            var noteBar = $('.note-toolbar');
-            noteBar.find('[data-toggle]').each(function () {
-                $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-            });
+            if (this.getSummer === null && this.getSummer !== true) {
+                $('#editor').summernote({
+                    height: 300,
+                });
+                var noteBar = $('.note-toolbar');
+                noteBar.find('[data-toggle]').each(function () {
+                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+                });
+
+                this.$store.commit('setSummer', true);
+            }
         },
         getImagen(fileName) {
             if(fileName){

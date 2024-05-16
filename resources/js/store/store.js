@@ -15,12 +15,20 @@ export default createStore({
     idServicio: null,
     selectedProductId: null,
     descargaId: null,
+    idMetadato:null,
     videoId:null,
+    idUsuario: null,
     inputValue: localStorage.getItem('inputValue') || false,
     summer: null,
 
   },
   mutations: {
+    setUsuarioId(state,idUsuario){
+      state.idUsuario = idUsuario
+    },
+    setMetadatoId(state,idMetadato){
+      state.idMetadato = idMetadato
+    },
     setVideoId(state, videoId) {
       state.videoId = videoId;
   },
@@ -78,6 +86,12 @@ export default createStore({
   },
  
   getters: {
+    getIdUsuario(state) {
+      return state.idUsuario;
+    },
+    getIdMetadato(state){
+      return state.idMetadato;
+    },
     getIdVideo(state) {
       return state.videoId;
     },

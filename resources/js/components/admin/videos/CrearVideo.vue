@@ -70,6 +70,10 @@ export default {
         };
     },
     methods: {
+        resetCampos(){
+            $('#orden').val('');
+            $('#titulo').val('');
+        },
         toggleCheckbox(type) {
             if (type === 'link') {
                 $('#checkboxLink').prop('checked', true);
@@ -114,6 +118,7 @@ export default {
                 this.$store.commit('setClaseAlerta', 1);
                 this.$store.commit('setMensajeAlerta', 'Video creado con éxito');
                 this.$store.commit('mostrarComponente', 80);
+                this.resetCampos();
             })
             .catch(error => {
                 console.error(error);

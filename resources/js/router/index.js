@@ -12,6 +12,7 @@ import FeriasView from '../views/FeriasView.vue';
 import VideosView from '../views/VideosView.vue';
 import ContactosView from '../views/ContactoView.vue';
 
+import ZonaPrivadaView from '../views/ZonaPrivadaView.vue';
 
 const routes = [
     {
@@ -62,6 +63,11 @@ const routes = [
         path: '/contactos',
         name: 'ContactosView',
         component: ContactosView
+    },
+    {
+        path: '/zonaPrivada',
+        name: 'ZonaPrivadaView',
+        component: ZonaPrivadaView
     },
     {
         path: '/admin/login',

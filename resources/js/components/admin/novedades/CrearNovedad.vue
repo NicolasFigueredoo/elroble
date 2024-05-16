@@ -114,6 +114,8 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Novedad creada con éxito');
                     this.$store.commit('mostrarComponente', 40);
+                    this.resetCampos();
+                    $('#editor').summernote('code', '');
 
                 })
                 .catch(error => {
@@ -149,7 +151,6 @@ export default {
     mounted() {
 
         this.summerNote();
-        this.resetCampos();
 
 
     }

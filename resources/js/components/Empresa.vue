@@ -34,22 +34,27 @@
                     <p class="title">¿Por qué elegirnos?</p>
                 </div>
 
-                <div class="row d-flex" style="margin-top: 48px">
-                    <div v-for="seccion in secciones" :key="seccion.id"
-                        class="col-lg-3 m-2 pt-5 tarjeta d-flex flex-column justify-content-end align-items-center">
-                        <div :style="{
-                            backgroundImage: `url(${getImagen(seccion.imagen)})`,
-                            backgroundSize: 'contain',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                            width: '80px',
-                            height: '80px'
-                        }">
-
+                <div class="row d-flex flex-wrap" style="margin-top: 48px;">
+                    <div v-for="seccion in secciones" :key="seccion.id" class="justify-content-around col-lg-4">
+                        <div 
+                            class="pt-5 p-3 tarjeta d-flex flex-column justify-content-end align-items-center" >
+                            <div :style="{
+                                backgroundImage: `url(${getImagen(seccion.imagen)})`,
+                                backgroundSize: 'contain',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                width: '80px',
+                                height: '80px'
+                            }">
+    
+                            </div>
+                            <p class="textoIcon" style="margin-top: 30px;">{{ seccion.titulo }}</p>
+                            <div class="infoIcon w-100 h-50" v-html="seccion.texto"> </div>
                         </div>
-                        <p class="textoIcon" style="margin-top: 30px;">{{ seccion.titulo }}</p>
-                        <div class="infoIcon w-100 h-50" v-html="seccion.texto"> </div>
                     </div>
+
+
+
                 </div>
 
             </div>
@@ -155,12 +160,9 @@ export default defineComponent({
 }
 
 .tarjeta {
-    width: 352px;
     height: 410px;
     background-color: white;
     text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .textoIcon {
@@ -190,6 +192,9 @@ export default defineComponent({
 
     .infoEmpresa{
     padding-left: 0px;
+}
+.tarjeta{
+    margin-top: 20px;
 }
 }
 </style>

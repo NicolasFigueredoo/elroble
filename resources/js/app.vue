@@ -1,6 +1,6 @@
 <template>
     <div>
-      <Navbar v-if="!isAdminRoute && !isAdminPanel"></Navbar>
+      <Navbar v-if="!isAdminRoute && !isAdminPanel && !isZonaPrivada"></Navbar>
       <router-view></router-view>
       <Footer v-if="!isAdminRoute && !isAdminPanel"></Footer>
 
@@ -21,6 +21,7 @@ import Footer from './components/Footer.vue';
     return {
       isAdminRoute: false,
       isAdminPanel: false,
+      isZonaPrivada: false
     };
   },
   created() {
@@ -35,6 +36,7 @@ import Footer from './components/Footer.vue';
     checkAdminRoute() {
       this.isAdminRoute = this.$route.path.startsWith('/admin/login');
       this.isAdminPanel = this.$route.path.startsWith('/admin/panel');
+      this.isZonaPrivada = this.$route.path.startsWith('/zonaPrivada');
 
     }
   }

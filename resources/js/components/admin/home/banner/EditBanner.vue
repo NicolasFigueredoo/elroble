@@ -29,11 +29,11 @@
             <div v-if="this.seccion === 'home'" class="row mt-2">
                 <div class="col-lg-6">
                 <label class="form-label">Texto boton</label>
-                <input type="text" class="form-control" id="txtBoton" :value="this.txtBoton">
+                <input type="text" class="form-control" id="txtBoton" :value="this.txtBoton" >
                 </div>
                 <div class="col-lg-6">
                 <label class="form-label">Link boton</label>
-                <input type="text" class="form-control" id="linkBoton" :value="this.linkBoton">
+                <input type="text" class="form-control" id="linkBoton" :value="this.linkBoton" >
                 </div>
 
             </div>
@@ -95,8 +95,8 @@ export default {
             formData.append('foto', this.foto);
             formData.append('bannerTitulo', $('#titulo').val());
             formData.append('bannerTexto', $('#editor').summernote('code').toString());
-            formData.append('txtBoton', this.txtBoton);
-            formData.append('linkBoton', this.linkBoton);
+            formData.append('txtBoton', $('#txtBoton').val());
+            formData.append('linkBoton', $('#linkBoton').val());
 
 
             axios.post('/api/updateBanner', formData, {
@@ -119,14 +119,17 @@ export default {
 
         },
         summerNote() {
-            $('#editor').summernote({
-                height: 180,
-            });
-            $('.summernote').summernote();
-            var noteBar = $('.note-toolbar');
-            noteBar.find('[data-toggle]').each(function () {
-                $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-            });
+            if (this.getSummer === null && this.getSummer !== true) {
+                $('#editor').summernote({
+                    height: 300,
+                });
+                var noteBar = $('.note-toolbar');
+                noteBar.find('[data-toggle]').each(function () {
+                    $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+                });
+
+                this.$store.commit('setSummer', true);
+            }
         },
         obtenerBannerInformacion() {
             axios.get(`/api/obtenerBanner`)

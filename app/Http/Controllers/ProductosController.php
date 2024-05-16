@@ -19,7 +19,7 @@ class ProductosController extends Controller
             $query->orderBy('orden', 'asc');
         }])->with(['SubProductos' => function ($query) {
             $query->orderBy('codigo', 'asc');
-        }])->get();
+        }])->orderBy('orden', 'asc')->get();
         return response()->json($productos);
     }
 

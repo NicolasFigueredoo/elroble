@@ -74,6 +74,7 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Descarga creada con éxito');
                     this.$store.commit('mostrarComponente', 60);
+                    this.resetCampos()
 
                 })
                 .catch(error => {
@@ -86,12 +87,6 @@ export default {
 
         },
    
-
-    },
-
-    mounted() {
-        this.resetCampos();
-
 
     }
 

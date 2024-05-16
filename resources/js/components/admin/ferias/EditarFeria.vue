@@ -11,13 +11,9 @@
                     <label class="form-label">Orden</label>
                 <input type="text" class="form-control" id="orden" :value="this.novedad.orden">
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-8">
                     <label class="form-label">Título</label>
                 <input type="text" class="form-control" id="titulo" :value="this.novedad.titulo">
-                </div>
-                <div class="col-lg-1 d-flex flex-column align-items-center">
-                    <label class="form-check-label" for="checkbox3">Destacado</label>
-                    <input type="checkbox" class="form-check-input" id="destacado">
                 </div>
             </div>
             <div class="row mt-3">
@@ -83,19 +79,15 @@ export default {
             this.foto = file.files[0]
         },
         updateNovedad() {
-            let destacado = $('#destacado').prop("checked");
-            let destacadoEnviar = 0;
-            if(destacado == true){
-                destacadoEnviar = 1;
-            }
+         
             let formData = new FormData();
             formData.append('idFeria', this.idNovedad);
             formData.append('texto', $('#editor').summernote('code').toString());
             formData.append('orden', $('#orden').val());
             formData.append('titulo', $('#titulo').val());
             formData.append('epigrafe', $('#epigrafe').val());
-            formData.append('etiqueta', $('#etiqueta').val());
-            formData.append('destacado',destacadoEnviar);
+            formData.append('etiqueta', '');
+            formData.append('destacado', 0);
 
 
             axios.post('/api/updateFeria', formData, {

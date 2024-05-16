@@ -88,6 +88,10 @@ export default {
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Servicio creado con éxito');
                     this.$store.commit('mostrarComponente', 50);
+                    $('#editor').summernote('code', '');
+                    this.resetCampos();
+
+
 
                 })
                 .catch(error => {

@@ -4,7 +4,7 @@
       <div class="col-md-3 formulario">
         <form>
           <div class="mb-3 justify-content-center align-items-center">
-            <img class="imgKotex" src="../../../../img/logoelroble.png" alt="" />
+            <img style="width: 100%;" class="imgKotex" src="../../../../img/logoelroble.png" alt="" />
           </div>
           <div class="mb-3">
             <label style="font-size: 14px" class="form-check-label"
@@ -31,18 +31,8 @@
               id="exampleInputPassword1"
             />
           </div>
-          <input
-            style="margin-right: 8px"
-            type="checkbox"
-            class="form-check-input"
-            id="inputRecordarme"
-          />
-          <label
-            style="font-size: 14px"
-            class="form-check-label"
-            for="checkbox1"
-            >Recordarme</label
-          >
+   
+     
           <div class="mensaje"></div>
 
           <button

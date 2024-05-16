@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="overflow-y:scroll; max-height: 500px;">
+    <div class="container">
 
         <div class="w-100 border-bottom d-flex justify-content-between">
             <h1>PRODUCTOS({{this.cantidadProductos}})</h1>
