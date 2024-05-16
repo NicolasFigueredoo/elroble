@@ -449,6 +449,7 @@ export default {
   align-items: center;
   gap: 20px;
   background: var(--Rojo, #E3202B);
+  border: none;
 }
 
 #botonLogin:hover{

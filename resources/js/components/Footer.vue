@@ -493,7 +493,7 @@ input {
 }
 
 #containerF{
-    gap: 40px;
+    gap: 30px;
 }
 @media screen and (max-width: 1000px) {
     #logoS{

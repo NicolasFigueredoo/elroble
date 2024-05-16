@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <p class="migaPan">Inicio <span class="negrita">> Videos</span></p>
-        <div  class="d-flex flex-wrap justify-content-between" style="margin-bottom: 90px; row-gap: 100px;">
+        <div class="d-flex flex-wrap justify-content-between" style="margin-bottom: 90px; row-gap: 100px;">
             <div v-for="(video, index) in videos" :key="index" class="row video-container" id="videoContainer">
                 <div class="col-lg 4 video-wrapper" @mouseover="hoverVideo(index, true)"
                     @mouseleave="hoverVideo(index, false)">
@@ -89,10 +89,18 @@ export default {
                 videoPlayer.style.top = '0';
                 videoPlayer.style.left = '0';
                 videoPlayer.style.zIndex = '9999';
-                videoPlayer.style.backgroundColor = 'black'; // Opcional: agregar fondo negro para el reproductor de video
+                videoPlayer.style.backgroundColor = 'black'; 
                 document.body.appendChild(videoPlayer);
                 videoPlayer.play();
+                $(document).on('click', (event) => {
+                    if (!$(event.target).closest('.video-wrapper').length) {
+                        window.location.reload();
+
+                    }
+                });
             }
+
+
         },
 
         getImagen(fileName) {
@@ -120,12 +128,6 @@ export default {
     },
     mounted() {
         this.obtenerVideos();
-        $(document).on('click', (event) => {
-            if (!$(event.target).closest('.video-wrapper').length) {
-                window.location.reload();
-
-            }
-        });
     }
 }
 </script>
@@ -215,11 +217,11 @@ export default {
 
 
 @media screen and (max-width: 460px) {
-    .videoLink{
+    .videoLink {
 
-    width: 100%;
-  
-}
+        width: 100%;
+
+    }
 
 }
 </style>
