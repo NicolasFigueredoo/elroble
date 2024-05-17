@@ -16,86 +16,87 @@
                 <div v-for="(slider, index) in sliders" :key="slider.id"
                     :class="['carousel-item', { 'active': index === 0 }]">
 
-                    <template v-if="isImage(slider.imagen)">
-                        <div :style="{
-                        backgroundImage: `url(${getImagen(slider.imagen)})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                        width: '100%',
-                        height: '586px'
-                    }">
-                            <div class="container">
-
+                        <template v-if="isImage(slider.imagen)">
+                            <div :style="{
+                            backgroundImage: `url(${getImagen(slider.imagen)})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            width: '100%',
+                            height: '586px'
+                        }">
+                                <div class="container">
+    
+                                    <div class="d-flex flex-column">
+                                        <div>
+                                            <div id="tituloSlider" v-html="slider.texto"
+                                                style="color: white; padding-top: 177px;"></div>
+                                        </div>
+                                        <div style="margin-top: 124px;">
+                                            <template v-if="slider.linkboton !== null">
+                                                <a :href="slider.linkboton">
+                                                    <button type="button" class="btn BverProductos">{{ slider.textoboton
+                                                        }}</button>
+                                                </a>
+    
+                                            </template>
+                                            <template v-else>
+    
+    
+                                                <router-link class="route" to="/productos">
+                                                    <button type="button" class="btn BverProductos">{{
+                            slider.textoboton }}</button>
+    
+                                                </router-link>
+    
+                                            </template>
+                                        </div>
+    
+    
+                                    </div>
+    
+    
+    
+                                </div>
+    
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="container" style="position: absolute; z-index: 10; margin-left: 15.5%;">
+    
                                 <div class="d-flex flex-column">
-                                    <div>
-                                        <div id="tituloSlider" v-html="slider.texto"
-                                            style="color: white; padding-top: 177px;"></div>
+                                    <div style="width: 400px;">
+                                        <div id="tituloSlider" style="color: white; padding-top: 177px;"
+                                            v-html="slider.texto"></div>
                                     </div>
                                     <div style="margin-top: 124px;">
-                                        <template v-if="slider.linkboton !== null">
+                                        <template v-if="slider.linkboton !== ''">
                                             <a :href="slider.linkboton">
                                                 <button type="button" class="btn BverProductos">{{ slider.textoboton
                                                     }}</button>
                                             </a>
-
+    
                                         </template>
                                         <template v-else>
-
-
-                                            <router-link class="route" to="/productos">
-                                                <button type="button" class="btn BverProductos">{{
-                        slider.textoboton }}</button>
-
-                                            </router-link>
-
-                                        </template>
-                                    </div>
-
-
-                                </div>
-
-
-
-                            </div>
-
-                        </div>
-                    </template>
-                    <template v-else>
-                        <div class="container" style="position: absolute; z-index: 10; margin-left: 15.5%;">
-
-                            <div class="d-flex flex-column">
-                                <div style="width: 400px;">
-                                    <div id="tituloSlider" style="color: white; padding-top: 177px;"
-                                        v-html="slider.texto"></div>
-                                </div>
-                                <div style="margin-top: 124px;">
-                                    <template v-if="slider.linkboton !== ''">
-                                        <a :href="slider.linkboton">
                                             <button type="button" class="btn BverProductos">{{ slider.textoboton
                                                 }}</button>
-                                        </a>
-
-                                    </template>
-                                    <template v-else>
-                                        <button type="button" class="btn BverProductos">{{ slider.textoboton
-                                            }}</button>
-                                    </template>
+                                        </template>
+                                    </div>
+    
+    
                                 </div>
-
-
+    
+    
+    
                             </div>
+                            <video class="d-block w-100" style="width: 100%; height: 586px; object-fit: cover;" controls
+                                autoplay muted>
+                                <source :src="getImagen(slider.imagen)" type="video/mp4">
+                                Tu navegador no soporta la etiqueta de video.
+                            </video>
+    
+                        </template>
 
-
-
-                        </div>
-                        <video class="d-block w-100" style="width: 100%; height: 586px; object-fit: cover;" controls
-                            autoplay muted>
-                            <source :src="getImagen(slider.imagen)" type="video/mp4">
-                            Tu navegador no soporta la etiqueta de video.
-                        </video>
-
-                    </template>
                 </div>
             </div>
         </div>

@@ -1,21 +1,26 @@
 <template>
     <div class="container">
         <p class="migaPan">Inicio <span class="negrita">> Videos</span></p>
-        <div class="d-flex flex-wrap justify-content-between" style="margin-bottom: 90px; row-gap: 100px;">
-            <div v-for="(video, index) in videos" :key="index" class="row video-container" id="videoContainer">
-                <div class="col-lg 4 video-wrapper" @mouseover="hoverVideo(index, true)"
+        <div class="row d-flex flex-wrap justify-content-between" style="margin-bottom: 90px; row-gap: 100px;">
+            <div v-for="(video, index) in videos" :key="index" class="col-lg-4 video-container" id="videoContainer">
+                <div class="video-wrapper" @mouseover="hoverVideo(index, true)"
                     @mouseleave="hoverVideo(index, false)">
                     <div class="video-content">
                         <div v-if="video.file !== null">
-                            <video class="videoLink" width="392" height="248" controls>
-                                <source :src="getImagen(video.file)" type="video/mp4">
-                                Tu navegador no soporta el formato de video.
-                            </video>
-                            <button v-if="showVideoPlayer" @click="closeVideoPlayer">Cerrar</button>
+                            <div v-if="!isImage(video.file)">
+                                <video class="videoLink" height="248" controls>
+                                    <source :src="getImagen(video.file)" type="video/mp4">
+                                    Tu navegador no soporta el formato de video.
+                                </video>
+                                <button v-if="showVideoPlayer" @click="closeVideoPlayer">Cerrar</button>
+                            </div>
+                            <div v-else>
+                                <img style="width: 100%; height: 100%;" :src="getImagen(video.file)" alt="">
+                            </div>
 
                         </div>
                         <div class="col-lg 4" v-else-if="video.link !== null">
-                            <iframe class="videoLink" width="392" height="248" :src="getYouTubeEmbedUrl(video.link)"
+                            <iframe class="videoLink" height="248" :src="getYouTubeEmbedUrl(video.link)"
                                 frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="overlay" v-show="hoverIndex === index"></div>
@@ -124,7 +129,13 @@ export default {
         },
         hoverVideo(index, isHovering) {
             this.hoverIndex = isHovering ? index : null;
-        }
+        },
+        isImage(url) {
+            if (url) {
+                const extension = url.split('.').pop().toLowerCase();
+                return ['jpg', 'jpeg', 'png', 'gif'].includes(extension);
+            }
+        },
     },
     mounted() {
         this.obtenerVideos();
@@ -135,6 +146,9 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+.videoLink{
+    width: 100%;
+}
 .container {
     margin-top: 23px;
 }

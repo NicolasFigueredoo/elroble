@@ -1,12 +1,10 @@
 <template>
   <div>
-
-
-
+    
     <nav class="navbar navbar-expand-lg"
       style="background-color: black; padding-bottom: 0px !important; height: 165px;">
       <div class="container-fluid">
-        <a class="navbar-brand d-block d-lg-none" href="#">
+        <a v-if="this.imagenLogo" class="navbar-brand d-block d-lg-none" href="#">
           <img class="logoNavbar" :src="getImagen(this.imagenLogo)" alt="">
         </a>
 
@@ -253,7 +251,8 @@ export default {
       telefonoSecundario: null,
       whatsappLink: null,
       usuario: null,
-      contraseña: null
+      contraseña: null,
+      imagenLogo: null
 
 
     }
