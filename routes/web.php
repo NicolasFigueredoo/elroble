@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailsController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\SuscripcionController;
@@ -145,3 +146,6 @@ Route::get('/api/deleteUsuarioZona/{idUsuario}', [UserController::class, 'delete
 
 //ZONA PRIVADA
 Route::post('/api/crearUsuarioZona', [UserController::class, 'crearUsuarioZona']);
+
+//CARGA MASIVA
+Route::post('/api/cargarCargaMasiva', [ExcelController::class, 'importExcel']);

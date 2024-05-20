@@ -59,7 +59,16 @@ class ExcelController extends Controller
             $productoOrden = $rowData[5];
 
             // Buscar o crear el producto
-            $producto = Producto::firstOrCreate(['nombre' => $productoNombre, 'orden' => $productoOrden]);
+            $producto = Producto::where('nombre', $productoNombre)->first();
+
+            // Verificar si el producto ya existe
+            if ($producto) {
+                // Si el producto ya existe, actualiza el orden
+                $producto->update(['orden' => $productoOrden]);
+            } else {
+                // Si el producto no existe, crea uno nuevo
+                $producto = Producto::create(['nombre' => $productoNombre, 'orden' => $productoOrden, 'destacado' => 0]);
+            }
         
             // Crear el subproducto asociado
             SubProducto::create([
