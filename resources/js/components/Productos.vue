@@ -2,13 +2,10 @@
     <div>
 
         <div class="container">
-            <div class="row" style="justify-content: space-around; margin-top: 42px;">
+            <div class="row product" style="justify-content: space-around; margin-top: 42px;">
                 <div v-for="producto in productosMostrados" :key="producto.id" class="col-lg-3 tapaCard" style="height: 400px;"
                 @mouseover="showIconsHover(producto.id)" @mouseout="hiddenIconsHover(producto.id)">
-
-
-
-                    <div class="imagenProducto" :style="{
+                    <div  v-if="producto.imagenes && producto.imagenes.length > 0" class="imagenProducto" :style="{
                         backgroundImage: `url(${getImagen(producto.imagenes[0].path)})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -105,6 +102,7 @@ export default {
         obtenerProductos() {
             axios.get('/api/obtenerProductos')
                 .then(response => {
+                    console.log(response.data)
                     this.productos = response.data;
                     this.cargarMasProductos()
                 })
@@ -186,5 +184,9 @@ export default {
     border: 1px solid var(--Rojo, #E3202B);
     color: var(--Rojo, #E3202B);
 
+}
+
+.tapaCard{
+    border: 1px solid #E5E5E5;
 }
 </style>

@@ -2,10 +2,10 @@
     <div>
 
         <!-- CAROUSEL -->
-        <div id="carouselExampleIndicators" class="carousel slide w-100" style="height: 586px;">
+        <div id="carouselExampleIndicators" class="carousel slide w-100" style="height: 600px;">
             <div class="container">
                 <div class="carousel-indicators d-flex justify-content-start"
-                    style="margin-left: 16.2%; margin-bottom: 60px;">
+                   >
                     <button v-for="(slider, index) in sliders" :key="index" type="button"
                         :data-bs-target="'#carouselExampleIndicators'" :data-bs-slide-to="index"
                         :class="{ 'active': index === 0 }" :aria-current="index === 0 ? 'true' : null"
@@ -23,7 +23,7 @@
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
                             width: '100%',
-                            height: '586px'
+                            height: '600px'
                         }">
                                 <div class="container">
     
@@ -115,14 +115,12 @@
                 </div>
             </div>
 
-            <div class="row productos mt-3" style="margin-left: 0px;">
+            <div class="row productos mt-3" style="margin-left: -10px;">
                 <div v-for="producto in productos" :key="producto.id" class="col-lg-3 tapaCard"
-                    style="height: 400px;" @mouseover="showIconsHover(producto.id)"
+                    style="height: 400px; margin-bottom: 20px; padding-left: 10px; padding-right: 10px;" @mouseover="showIconsHover(producto.id)"
                     @mouseout="hiddenIconsHover(producto.id)">
 
-
-
-                    <div class="imagenProducto" :style="{
+                    <div v-if="producto.imagenes && producto.imagenes.length > 0" class="imagenProducto" :style="{
                         backgroundImage: `url(${getImagen(producto.imagenes[0].path)})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -467,6 +465,11 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 1);
 }
 
+.carousel-indicators{
+    /* margin-left: 16.2%;  */
+    margin-bottom: 60px;
+}
+
 .verTodosButton {
     padding: 11px 25px;
     justify-content: center;
@@ -642,6 +645,10 @@ export default defineComponent({
 
 }
 
+.tapaCard{
+    border: 1px solid #E5E5E5;
+}
+
 .card-body:hover #Hov {
     transform: translateY(-5px);
 }
@@ -684,4 +691,7 @@ export default defineComponent({
         width: 100px;
     }
 }
+
+
+
 </style>

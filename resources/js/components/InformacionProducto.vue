@@ -52,7 +52,7 @@
         </div>
         <div class="table-responsive">
 
-        <table class="table w-100" style="margin-top: 131px; margin-bottom: 170px;">
+        <table class="table w-100" style="margin-top:40px; margin-bottom: 170px;">
             <thead style="height: 74px">
                 <tr>
                     <th scope="col" class="col-3 encabezado">Código</th>
