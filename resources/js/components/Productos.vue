@@ -33,7 +33,7 @@
 
                     <div class="d-flex flex-column justify-content-center align-items-center"
                         :ref="'productoH' + producto.id">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center mt-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="2" viewBox="0 0 27 2"
                                 fill="none">
                                 <path d="M1 1H26" stroke="#E3202B" stroke-width="2" stroke-linecap="round" />
