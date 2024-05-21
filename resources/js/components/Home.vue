@@ -3,103 +3,79 @@
 
         <!-- CAROUSEL -->
         <div id="carouselExampleIndicators" class="carousel slide w-100" style="height: 600px;">
-            <div class="container">
-                <div class="carousel-indicators d-flex justify-content-start"
-                   >
-                    <button v-for="(slider, index) in sliders" :key="index" type="button"
-                        :data-bs-target="'#carouselExampleIndicators'" :data-bs-slide-to="index"
-                        :class="{ 'active': index === 0 }" :aria-current="index === 0 ? 'true' : null"
-                        :aria-label="'Slide ' + (index + 1)"></button>
-                </div>
-            </div>
-            <div class="carousel-inner">
-                <div v-for="(slider, index) in sliders" :key="slider.id"
-                    :class="['carousel-item', { 'active': index === 0 }]">
-
-                        <template v-if="isImage(slider.imagen)">
-                            <div :style="{
-                            backgroundImage: `url(${getImagen(slider.imagen)})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                            width: '100%',
-                            height: '600px'
-                        }">
-                                <div class="container">
-    
-                                    <div class="d-flex flex-column">
-                                        <div>
-                                            <div id="tituloSlider" v-html="slider.texto"
-                                                style="color: white; padding-top: 177px;"></div>
-                                        </div>
-                                        <div style="margin-top: 124px;">
-                                            <template v-if="slider.linkboton !== null">
-                                                <a :href="slider.linkboton">
-                                                    <button type="button" class="btn BverProductos">{{ slider.textoboton
-                                                        }}</button>
-                                                </a>
-    
-                                            </template>
-                                            <template v-else>
-    
-    
-                                                <router-link class="route" to="/productos">
-                                                    <button type="button" class="btn BverProductos">{{
-                            slider.textoboton }}</button>
-    
-                                                </router-link>
-    
-                                            </template>
-                                        </div>
-    
-    
-                                    </div>
-    
-    
-    
-                                </div>
-    
+    <div class="carousel-inner">
+        <div v-for="(slider, index) in sliders" :key="slider.id" :class="['carousel-item', { 'active': index === 0 }]">
+            <template v-if="isImage(slider.imagen)">
+                <div :style="{
+                    backgroundImage: `url(${getImagen(slider.imagen)})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    width: '100%',
+                    height: '600px'
+                }">
+                    <div class="container">
+                        <div class="d-flex flex-column">
+                            <div>
+                                <div id="tituloSlider" v-html="slider.texto" style="color: white; padding-top: 177px;"></div>
                             </div>
-                        </template>
-                        <template v-else>
-                            <div class="container" style="position: absolute; z-index: 10; margin-left: 15.5%;">
-    
-                                <div class="d-flex flex-column">
-                                    <div style="width: 400px;">
-                                        <div id="tituloSlider" style="color: white; padding-top: 177px;"
-                                            v-html="slider.texto"></div>
-                                    </div>
-                                    <div style="margin-top: 124px;">
-                                        <template v-if="slider.linkboton !== ''">
-                                            <a :href="slider.linkboton">
-                                                <button type="button" class="btn BverProductos">{{ slider.textoboton
-                                                    }}</button>
-                                            </a>
-    
-                                        </template>
-                                        <template v-else>
-                                            <button type="button" class="btn BverProductos">{{ slider.textoboton
-                                                }}</button>
-                                        </template>
-                                    </div>
-    
-    
-                                </div>
-    
-    
-    
+                            <div style="margin-top: 124px;">
+                                <template v-if="slider.linkboton !== null">
+                                    <a :href="slider.linkboton">
+                                        <button type="button" class="btn BverProductos">{{ slider.textoboton }}</button>
+                                    </a>
+                                </template>
+                                <template v-else>
+                                    <router-link class="route" to="/productos">
+                                        <button type="button" class="btn BverProductos">{{ slider.textoboton }}</button>
+                                    </router-link>
+                                </template>
                             </div>
-                            <video class="d-block w-100" style="width: 100%; height: 586px; object-fit: cover;" controls
-                                autoplay muted>
-                                <source :src="getImagen(slider.imagen)" type="video/mp4">
-                                Tu navegador no soporta la etiqueta de video.
-                            </video>
-    
-                        </template>
-
+                        </div>
+                    </div>
+                    <!-- Indicadores del carrusel -->
+                    <div class="carousel-indicators" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+                        <button v-for="(indicator, i) in sliders" :key="i" type="button"
+                            :data-bs-target="'#carouselExampleIndicators'" :data-bs-slide-to="i"
+                            :class="{ 'active': i === index }" :aria-current="i === index ? 'true' : null"
+                            :aria-label="'Slide ' + (i + 1)"></button>
+                    </div>
                 </div>
-            </div>
+            </template>
+            <template v-else>
+                <div class="container" style="position: absolute; z-index: 10; margin-left: 15.5%;">
+                    <div class="d-flex flex-column">
+                        <div style="width: 400px;">
+                            <div id="tituloSlider" style="color: white; padding-top: 177px;" v-html="slider.texto"></div>
+                        </div>
+                        <div style="margin-top: 124px;">
+                            <template v-if="slider.linkboton !== ''">
+                                <a :href="slider.linkboton">
+                                    <button type="button" class="btn BverProductos">{{ slider.textoboton }}</button>
+                                </a>
+                            </template>
+                            <template v-else>
+                                <button type="button" class="btn BverProductos">{{ slider.textoboton }}</button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <video class="d-block w-100" style="width: 100%; height: 586px; object-fit: cover;" controls autoplay muted>
+                    <source :src="getImagen(slider.imagen)" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                </video>
+                <!-- Indicadores del carrusel -->
+                <div class="carousel-indicators" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-68%);">
+                    <button v-for="(indicator, i) in sliders" :key="i" type="button"
+                        :data-bs-target="'#carouselExampleIndicators'" :data-bs-slide-to="i"
+                        :class="{ 'active': i === index }" :aria-current="i === index ? 'true' : null"
+                        :aria-label="'Slide ' + (i + 1)"></button>
+                </div>
+            </template>
         </div>
+    </div>
+</div>
+
 
         <!-- PRODUCTOS DESTACADOS -->
         <div class="container" style="margin-top: 80px;">
@@ -110,17 +86,15 @@
                 <div class="col-lg-4 d-flex justify-content-end">
                     <router-link class="route" to="/productos">
 
-                    <button type="button" class="btn verTodosButton">Ver todos</button>
+                        <button type="button" class="btn verTodosButton">Ver todos</button>
                     </router-link>
                 </div>
             </div>
 
-            <div class="row productos mt-3" style="margin-left: -10px;">
-                <div v-for="producto in productos" :key="producto.id" class="col-lg-3 tapaCard"
-                    style="height: 400px; margin-bottom: 20px; padding-left: 10px; padding-right: 10px;" @mouseover="showIconsHover(producto.id)"
-                    @mouseout="hiddenIconsHover(producto.id)">
-
-                    <div v-if="producto.imagenes && producto.imagenes.length > 0" class="imagenProducto" :style="{
+            <div class="row product mt-3" style="justify-content: space-around; margin-top: 42px; row-gap: 5px;">
+                <div v-for="producto in productos" :key="producto.id" class="col-lg-3 tapaCard" style="height: 400px;"
+                @mouseover="showIconsHover(producto.id)" @mouseout="hiddenIconsHover(producto.id)">
+                    <div  v-if="producto.imagenes && producto.imagenes.length > 0" class="imagenProducto" :style="{
                         backgroundImage: `url(${getImagen(producto.imagenes[0].path)})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -130,10 +104,10 @@
                     }">
 
                         <div :id="'productoIcono' + producto.id" class="d-flex justify-content-center"
-                            style="padding-top: 120px;" @click="verProducto(producto.id)">
+                            style="padding-top: 120px;">
 
-                            <div class="containerIcono" v-show="showIcons[producto.id]" @mouseover="changeIcon()"
-                                 @mouseout="changeIcon2()"
+                            <div class="containerIcono" v-show="showIcons[producto.id]" @mouseover="changeIcon()" @click="verProducto(producto.id)"
+                                @mouseout="changeIcon2()"
                                 style="width: 50px; height: 50px; padding: 13px; cursor: pointer;">
                                 <svg class="iconoSearch" xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                     viewBox="0 0 25 25" fill="none">
@@ -154,7 +128,7 @@
                                 <path d="M1 1H26" stroke="#E3202B" stroke-width="2" stroke-linecap="round" />
                             </svg>
                         </div>
-                        <div class="ml-2 col-lg-6">
+                        <div class="col-lg-6">
                             <p class="titleProducto" style="margin-top: 23px;">{{ producto.nombre }}</p>
                         </div>
                     </div>
@@ -198,8 +172,7 @@
                         </router-link>
                     </div>
                     <div class="pb-5" v-else>
-                        <a :href="this.banner.link" style="text-decoration: none;"
-                            >
+                        <a :href="this.banner.link" style="text-decoration: none;">
                             <button type="button" class="btn masInformacion2">{{ this.banner.textoboton }}</button>
                         </a>
                     </div>
@@ -465,8 +438,14 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 1);
 }
 
-.carousel-indicators{
+.carousel-indicators {
     /* margin-left: 16.2%;  */
+    justify-content: flex-start;
+    width: 67%;
+
+    margin-right: 0px;
+    margin-left: 0px;
+    margin: 0px;
     margin-bottom: 60px;
 }
 
@@ -645,7 +624,7 @@ export default defineComponent({
 
 }
 
-.tapaCard{
+.tapaCard {
     border: 1px solid #E5E5E5;
 }
 
@@ -677,11 +656,13 @@ export default defineComponent({
     /* Ajustar según sea necesario */
 }
 
+.col-lg-3{
+    width: 24.5%;
+}
+
 @media screen and (max-width: 400px) {
 
-    .card {
-        width: 346px;
-    }
+    
 
     .titulo {
         font-size: 20px;
@@ -690,7 +671,35 @@ export default defineComponent({
     .masInformacion2 {
         width: 100px;
     }
+
 }
+
+@media screen and (max-width: 600px) {
+    .col-lg-3{
+        width: 80% !important;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+.col-lg-3{
+width: 80% !important;
+}
+
+}
+
+
+
+@media screen and (max-width: 1500px) {
+    .carousel-indicators{
+        width: 89%;
+    }
+
+}
+
+
+
+
 
 
 
