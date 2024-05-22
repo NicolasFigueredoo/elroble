@@ -128,8 +128,9 @@
                                     </defs>
                                 </svg>
                             </div>
-
+                            <a :href="'https://wa.me/' + whatsappLink" style="text-decoration: none;" target="_blank">
                             <p class="textoF">{{ telefono }}</p>
+                            </a>
                         </div>
                         <div v-if="telefono_secundario" class="d-flex" style="cursor: pointer;">
                             <div style="width: 20px;">
@@ -251,7 +252,7 @@ export default {
             axios.get(`/api/obtenerContacto`)
                 .then(response => {
                     this.telefono = response.data[0].telefono
-                    this.whatsapp = response.data[0].whatsapp
+                    this.whatsapp = response.data[0].telefono
                     this.email = response.data[0].email
                     this.facebook = response.data[0].facebook
                     this.instagram = response.data[0].instagram

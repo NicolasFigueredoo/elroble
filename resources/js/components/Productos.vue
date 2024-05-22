@@ -1,9 +1,9 @@
 <template>
     <div>
 
-        <div class="container">
-            <div class="row product" style="justify-content: space-around; margin-top: 42px;">
-                <div v-for="producto in productosMostrados" :key="producto.id" class="col-lg-3 tapaCard" style="height: 400px;"
+        <div class="container" style="padding-bottom: 150px;">
+            <div class="row product" style="justify-content: space-around; margin-top: 42px; row-gap: 5px;">
+                <div v-for="producto in productos" :key="producto.id" class="col-lg-3 tapaCard" style="height: 400px;"
                 @mouseover="showIconsHover(producto.id)" @mouseout="hiddenIconsHover(producto.id)">
                     <div  v-if="producto.imagenes && producto.imagenes.length > 0" class="imagenProducto" :style="{
                         backgroundImage: `url(${getImagen(producto.imagenes[0].path)})`,
@@ -33,7 +33,7 @@
 
                     <div class="d-flex flex-column justify-content-center align-items-center"
                         :ref="'productoH' + producto.id">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center mt-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="2" viewBox="0 0 27 2"
                                 fill="none">
                                 <path d="M1 1H26" stroke="#E3202B" stroke-width="2" stroke-linecap="round" />
@@ -46,9 +46,6 @@
                 </div>
 
 
-            </div>
-            <div class="d-flex justify-content-center" style="margin-top: 85px; margin-bottom: 138px;">
-                <button @click="cargarMasProductos" type="button" class="btn buttonMasProductos">Cargar más productos</button>
             </div>
 
         </div>
@@ -64,8 +61,6 @@ export default {
         return {
             productos: [],
             productosMostrados: [], 
-      cantidadAMostrar: 16, 
-      cargados: 0,
             showIcons: {},
             iconoColor: 'white',
 
@@ -103,7 +98,6 @@ export default {
             axios.get('/api/obtenerProductos')
                 .then(response => {
                     this.productos = response.data;
-                    this.cargarMasProductos()
                 })
                 .catch(error => {
                     console.error(error);
@@ -187,5 +181,31 @@ export default {
 
 .tapaCard{
     border: 1px solid #E5E5E5;
+}
+
+.col-lg-3{
+    width: 24.5%;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .col-lg-3{
+    width: 33% !important;
+}
+
+}
+
+@media screen and (max-width: 800px) {
+
+.col-lg-3{
+width: 49% !important;
+}
+
+}
+
+@media screen and (max-width: 400px) {
+    .col-lg-3{
+width: 80% !important;
+}
 }
 </style>
