@@ -17,13 +17,9 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <label class="form-label">Epígrafe</label>
                 <input type="text" class="form-control" id="epigrafe" :value="this.novedad.epigrafe">
-                </div>
-                <div class="col-lg-6">
-                    <label class="form-label">Etiqueta</label>
-                <input type="text" class="form-control" id="etiqueta" :value="this.novedad.etiqueta">
                 </div>
             </div>
             <div class="mb-3 mt-3">

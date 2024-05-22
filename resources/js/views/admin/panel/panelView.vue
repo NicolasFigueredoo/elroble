@@ -5,7 +5,7 @@
         <div class="div1">
                 <nav id="sidebar" class="sidebar bg-body-light shadow-right" style="height: 100vh;" >
                     <a class="sidebar-brand">
-                        <img src="../../../../img/logoelroble.png" class="w-75">
+                        <img src="../../../../../public/img/logoRoble.png" class="w-75">
                     </a>
                     <ul class="sidebar-nav nav accordion">
                         <li class="sidebar-header text-uppercase">
