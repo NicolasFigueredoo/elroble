@@ -123,7 +123,6 @@ export default {
         obtenerSliderInformacion() {
             axios.get(`/api/obtenerSlider/${this.idSlider}`)
                 .then(response => {
-                    console.log(response.data)
                     this.slider = response.data;
                     $('#editor').summernote('code', this.slider.texto);
                 })

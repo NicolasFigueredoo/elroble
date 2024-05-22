@@ -118,7 +118,6 @@ export default {
         obtenerDescargas() {
             axios.get('/api/obtenerFileZonas')
                 .then(response => {
-                    console.log(response)
 
                     this.descargas = response.data
                     

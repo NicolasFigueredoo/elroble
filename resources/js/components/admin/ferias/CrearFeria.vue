@@ -91,7 +91,6 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(response.data)
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Feria creada con éxito');

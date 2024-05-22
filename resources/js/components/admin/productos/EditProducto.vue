@@ -199,7 +199,6 @@ export default {
 
             axios.get(`/api/obtenerProducto/${this.idProducto}`)
                 .then(response => {
-                    console.log(response.data)
                     this.nombre = response.data.nombre
                     this.orden = response.data.orden
                     this.subProductos = response.data.sub_productos

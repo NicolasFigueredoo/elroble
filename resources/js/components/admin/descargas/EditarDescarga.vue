@@ -99,7 +99,6 @@ export default {
         obtenerDescarga() {
             axios.get(`/api/obtenerDescarga/${this.idDescarga}`)
                 .then(response => {
-                    console.log(response)
                     this.descarga = response.data;
                 })
                 .catch(error => {

@@ -70,7 +70,6 @@ export default {
         guardarFotoNavbar() {
             const file = this.$refs.img1;
             this.foto1 = file.files[0]
-            console.log(this.foto1)
         },
 
         guardarFotoFooter() {

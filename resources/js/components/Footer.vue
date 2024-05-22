@@ -241,7 +241,6 @@ export default {
         obtenerLogo() {
             axios.get(`/api/obtenerLogos`)
                 .then(response => {
-                    console.log(response)
                     this.imagenLogo = response.data.footer
                 })
                 .catch(error => {

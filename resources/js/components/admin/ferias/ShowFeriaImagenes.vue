@@ -120,7 +120,6 @@ export default {
         },
 
         cargarImagen() {
-            console.log(this.idProducto)
             axios.post('/api/guardarImagenFeria', {
                 idFeria: this.idProducto,
                 imagen: this.imagenProducto,

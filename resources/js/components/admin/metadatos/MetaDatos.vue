@@ -59,7 +59,6 @@ methods:{
     obtenerMetadatos(){
         axios.get('/api/obtenerMetadatos')
                 .then(response => {
-                    console.log(response.data)
                     this.metadatos = response.data
                 })
                 .catch(error => {
