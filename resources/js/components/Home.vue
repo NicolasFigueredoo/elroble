@@ -299,7 +299,6 @@ export default defineComponent({
         obtenerNovedades() {
             axios.get(`/api/obtenerNovedades`)
                 .then(response => {
-                    console.log(response.data, '?')
                     this.novedades = response.data;
                     this.novedades = this.novedades.filter(novedad => novedad.destacado == 1);
 

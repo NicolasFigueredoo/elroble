@@ -281,7 +281,7 @@ class AdminController extends Controller
         $feria->orden = $request->orden;
         $feria->titulo = $request->titulo;
         $feria->epigrafe = $request->epigrafe;
-        $feria->etiqueta = $request->etiqueta;
+        $feria->texto = $request->texto;
         $feria->destacado = $request->destacado;
 
         $feria->texto = $request->texto;
@@ -307,7 +307,7 @@ class AdminController extends Controller
         $feria->orden = $request->orden;
         $feria->titulo = $request->titulo;
         $feria->epigrafe = $request->epigrafe;
-        $feria->etiqueta = $request->etiqueta;
+        $feria->texto = $request->texto;
         $feria->destacado = $request->destacado;
 
         $feria->save();

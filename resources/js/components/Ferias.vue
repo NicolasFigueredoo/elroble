@@ -78,7 +78,6 @@ export default {
             axios.get(`/api/obtenerFerias`)
                 .then(response => {
                     this.novedades = response.data;
-                    console.log(this.novedades[0].imagenes[0].path)
                 })
                 .catch(error => {
                     console.error(error);

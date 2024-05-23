@@ -117,7 +117,6 @@ export default {
         obtenerNovedadInformacion() {
             axios.get(`/api/obtenerFeria/${this.idNovedad}`)
                 .then(response => {
-                    console.log(response)
                     this.imagen1 = response.data.imagenes[0].path
                     this.imagen2 = response.data.imagenes[1].path
                     this.imagen3 = response.data.imagenes[2].path

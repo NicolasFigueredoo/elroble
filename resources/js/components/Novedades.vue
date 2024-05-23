@@ -78,7 +78,6 @@ export default {
         obtenerNovedades() {
             axios.get(`/api/obtenerNovedades`)
                 .then(response => {
-                    console.log(response.data, '?')
                     this.novedades = response.data;
 
                 })
