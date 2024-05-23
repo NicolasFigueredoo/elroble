@@ -57,7 +57,7 @@
 
 
                     </div>
-                    <div class="video-title">{{ video.titulo }}</div>
+                    <div class="video-title mt-3">{{ video.titulo }}</div>
                 </div>
             </div>
         </div>

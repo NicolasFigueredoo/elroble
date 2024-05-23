@@ -81,7 +81,7 @@
               </div>
               <div>
                 <router-link class="route" to="/productos">
-                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/productos') ? '700' : '500' }">Productos</p>
+                  <p class="textoNavbar2" @click="reloadProducto" :style="{ fontWeight: isRouteActive('/productos') ? '700' : '500' }">Productos</p>
                 </router-link>
               </div>
               <div>
@@ -96,12 +96,12 @@
               </div>
               <div>
                 <router-link class="route" to="/novedades">
-                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/novedades') ? '700' : '500' }">novedades</p>
+                  <p class="textoNavbar2" @click="reloadNovedad" :style="{ fontWeight: isRouteActive('/novedades') ? '700' : '500' }">novedades</p>
                 </router-link>
               </div>
               <div>
                 <router-link class="route" to="/ferias">
-                  <p class="textoNavbar2" :style="{ fontWeight: isRouteActive('/ferias') ? '700' : '500' }">ferias</p>
+                  <p class="textoNavbar2"  @click="reloadNovedad" :style="{ fontWeight: isRouteActive('/ferias') ? '700' : '500' }">ferias</p>
                 </router-link>
               </div>
               <div>
@@ -260,7 +260,31 @@ export default {
 
     }
   },
+  computed:{
+    idNovedad() {
+            const selectedNovedadId = this.$store.getters['getIdNovedad'];
+            return selectedNovedadId;
+        },
+        idProducto() {
+            const selectedProductId = this.$store.getters['getSelectedProductId'];
+            return selectedProductId;
+        }
+  },
   methods: {
+
+    reloadNovedad(){
+      if(this.idNovedad !== null){
+        location.reload();
+
+      }
+
+    },
+    reloadProducto(){
+      if(this.idProducto !== null){
+        location.reload();
+      }
+
+    },
 
     ingresarZona() {
       if (this.usuario && this.contraseña) {

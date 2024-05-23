@@ -65,19 +65,35 @@ class ExcelController extends Controller
             if ($producto) {
                 // Si el producto ya existe, actualiza el orden
                 $producto->update(['orden' => $productoOrden]);
+
+                $subProducto = SubProducto::where('codigo', $codigo)->where('producto_id', $producto->id)->first();
+
+                if($subProducto){
+                    $subProducto->update(['tamaño' => $tamaño, 'pack' => $pack, 'codBarra' => $codBarra]);
+                }else{
+                    SubProducto::create([
+                        'producto_id' => $producto->id,
+                        'codigo' => $codigo,
+                        'tamaño' => $tamaño,
+                        'pack' => $pack,
+                        'codBarra' => $codBarra,
+                    ]);
+                }
+
+
             } else {
                 // Si el producto no existe, crea uno nuevo
                 $producto = Producto::create(['nombre' => $productoNombre, 'orden' => $productoOrden, 'destacado' => 0]);
+                // Crear el subproducto asociado
+                SubProducto::create([
+                    'producto_id' => $producto->id,
+                    'codigo' => $codigo,
+                    'tamaño' => $tamaño,
+                    'pack' => $pack,
+                    'codBarra' => $codBarra,
+                ]);
             }
         
-            // Crear el subproducto asociado
-            SubProducto::create([
-                'producto_id' => $producto->id,
-                'codigo' => $codigo,
-                'tamaño' => $tamaño,
-                'pack' => $pack,
-                'codBarra' => $codBarra,
-            ]);
         }
 
         return response()->json(['message' => 'Datos importados exitosamente!'], 200);

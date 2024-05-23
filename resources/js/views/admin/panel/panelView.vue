@@ -564,8 +564,9 @@ export default {
     },
     methods:{
         logout(){
-            this.$router.push('/admin/login');
             localStorage.setItem('idLogin', JSON.stringify(null));
+            this.$store.commit('setLoginId', null);
+            this.$router.push('/admin/login');
 
         },
 

@@ -63,6 +63,9 @@ export default {
       const user = this.$store.getters.getUsuarioRecordar;
       return user;
     },
+    getIdLogin(){
+            return this.$store.getters['getIdLogin'];
+        },
   },
 
   methods: {
@@ -106,6 +109,13 @@ export default {
     },
   },
   mounted() {
+
+        if(this.getIdLogin == null){
+            this.$router.push('/admin/login');
+        }else{
+          this.$router.push('/admin/panel');
+
+        }
   },
 };
 </script>

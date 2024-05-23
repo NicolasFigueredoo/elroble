@@ -3,8 +3,8 @@
 
         <div class="container" style="padding-bottom: 150px;">
             <div class="row product" style="justify-content: space-around; margin-top: 42px; row-gap: 5px;">
-                <div v-for="producto in productos" :key="producto.id" class="col-lg-3 tapaCard" style="height: 400px;"
-                @mouseover="showIconsHover(producto.id)" @mouseout="hiddenIconsHover(producto.id)">
+                <div v-for="producto in productos" :key="producto.id" class="col-lg-3 tapaCard" style="height: 400px; cursor: pointer;"
+                @mouseover="showIconsHover(producto.id)" @mouseout="hiddenIconsHover(producto.id)" @click="verProducto(producto.id)" >
                     <div  v-if="producto.imagenes && producto.imagenes.length > 0" class="imagenProducto" :style="{
                         backgroundImage: `url(${getImagen(producto.imagenes[0].path)})`,
                         backgroundSize: 'cover',
@@ -17,7 +17,7 @@
                         <div :id="'productoIcono' + producto.id" class="d-flex justify-content-center"
                             style="padding-top: 120px;">
 
-                            <div class="containerIcono" v-show="showIcons[producto.id]" @mouseover="changeIcon()" @click="verProducto(producto.id)"
+                            <div class="containerIcono" v-show="showIcons[producto.id]" @mouseover="changeIcon()"
                                 @mouseout="changeIcon2()"
                                 style="width: 50px; height: 50px; padding: 13px; cursor: pointer;">
                                 <svg class="iconoSearch" xmlns="http://www.w3.org/2000/svg" width="25" height="25"

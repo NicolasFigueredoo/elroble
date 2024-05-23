@@ -159,7 +159,7 @@ export default {
                 .then((response) => {
                     this.producto = response.data
                     this.nombre = response.data.nombre,
-                        this.texto = response.data.texto
+                    this.texto = response.data.texto
                     this.imagenes = response.data.imagenes
                     this.subProductos = response.data.sub_productos
 
@@ -175,7 +175,6 @@ export default {
     },
     mounted() {
         this.obtenerInformacionProducto();
-        this.$store.commit('setSelectedProductId', null);
 
     }
 }
